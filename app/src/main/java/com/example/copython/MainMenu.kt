@@ -131,8 +131,8 @@ fun bottomBar(){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Blue,
-            contentColor = Color.White)) {
+                containerColor = Color.Blue,
+                contentColor = Color.White)) {
             Text(text = "Main")
         }
         Button(
