@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,18 +41,18 @@ fun CourseExampleLayout(){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        topTitle("Introduction to Python")
+        TopTitle("Current Courses")
 
-        scrollableTextsColumn()
+        ScrollableTextsColumn()
 
         // Bottom Navigation Bar
-        bottomBar()
+        BottomBar()
     }
 
 }
 
 @Composable
-fun scrollableTextsColumn(){
+fun ScrollableTextsColumn(){
     Column (
         modifier = Modifier
             .padding(30.dp)

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,31 +33,31 @@ class MainMenu : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            mainMenuLayout()
+            MainMenuLayout()
         }
     }
 }
 
 @Composable
-fun mainMenuLayout(){
+fun MainMenuLayout(){
     Column(
         modifier = Modifier
             .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        topTitle("Current Courses")
+        TopTitle("Current Courses")
 
-        arrangeOfCoursesButtons()
+        ArrangeOfCoursesButtons()
 
         // Bottom Navigation Bar
-        bottomBar()
+        BottomBar()
     }
 
 }
 
 @Composable
-fun topTitle(tittle: String){
+fun TopTitle(tittle: String){
     Box(
         modifier = Modifier
             .fillMaxWidth() // Make the Box span the width of the screen
@@ -68,7 +65,7 @@ fun topTitle(tittle: String){
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "$tittle",
+            text = tittle,
             color = Color.White,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
@@ -81,7 +78,7 @@ fun topTitle(tittle: String){
     }
 }
 @Composable
-fun arrangeOfCoursesButtons(){
+fun ArrangeOfCoursesButtons(){
     Column (
         modifier = Modifier
             .height(570.dp)
@@ -89,16 +86,16 @@ fun arrangeOfCoursesButtons(){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        courseButton(courseName = "Basic Concepts of Programming")
-        courseButton(courseName = "This is a button for user Course 2")
-        courseButton(courseName = "This is a button for user Course 3")
+        CourseButton(courseName = "Basic Concepts of Programming")
+        CourseButton(courseName = "This is a button for user Course 2")
+        CourseButton(courseName = "This is a button for user Course 3")
 
     }
 
 }
 
 @Composable
-fun courseButton(courseName: String){
+fun CourseButton(courseName: String){
 
     val newButtonColor = Color(0xFF221387)
 
@@ -121,7 +118,7 @@ fun courseButton(courseName: String){
 }
 
 @Composable
-fun bottomBar(){
+fun BottomBar(){
     Row( modifier = Modifier
         .fillMaxWidth()
         .height(80.dp),
@@ -183,6 +180,6 @@ fun bottomBar(){
 @Composable
 fun GreetingPreview2() {
     COPYTHONTheme {
-        mainMenuLayout()
+        MainMenuLayout()
     }
 }
