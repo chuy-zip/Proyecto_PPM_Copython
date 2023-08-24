@@ -61,7 +61,7 @@ fun TopTitle(tittle: String){
     Box(
         modifier = Modifier
             .fillMaxWidth() // Make the Box span the width of the screen
-            .background(Color.Blue), // Set background color for the Box
+            .background(Color(51,97,172)), // Set background color for the Box
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -132,7 +132,7 @@ fun BottomBar(){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Blue,
+                containerColor = Color(51,97,172),
                 contentColor = Color.White)) {
             Text(text = "Main")
         }
@@ -144,7 +144,7 @@ fun BottomBar(){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Blue,
+                containerColor = Color(51,97,172),
                 contentColor = Color.White)) {
             Text(text = "Search")
         }
@@ -156,7 +156,7 @@ fun BottomBar(){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Blue,
+                containerColor = Color(51,97,172),
                 contentColor = Color.White)) {
             Text(text = "AI")
         }
@@ -168,7 +168,7 @@ fun BottomBar(){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Blue,
+                containerColor = Color(51,97,172),
                 contentColor = Color.White)) {
             Text(text = "USER")
         }
