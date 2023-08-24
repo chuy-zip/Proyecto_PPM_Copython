@@ -1,4 +1,4 @@
-package com.example.copython.ui.theme
+package com.example.copython.ui.theme.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

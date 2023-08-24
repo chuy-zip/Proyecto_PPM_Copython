@@ -49,24 +49,7 @@ fun mainMenuLayout(){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Box(
-            modifier = Modifier
-                .fillMaxWidth() // Make the Box span the width of the screen
-                .background(Color.Blue), // Set background color for the Box
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "\nCurrent Courses",
-                color = Color.White,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-
-                modifier = Modifier
-                    .padding(16.dp)
-                    .height(60.dp)
-
-            )
-        }
+        topTitle("Current Courses")
 
         arrangeOfCoursesButtons()
 
@@ -77,10 +60,31 @@ fun mainMenuLayout(){
 }
 
 @Composable
+fun topTitle(tittle: String){
+    Box(
+        modifier = Modifier
+            .fillMaxWidth() // Make the Box span the width of the screen
+            .background(Color.Blue), // Set background color for the Box
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "$tittle",
+            color = Color.White,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+
+            modifier = Modifier
+                .padding(16.dp)
+                .height(60.dp)
+
+        )
+    }
+}
+@Composable
 fun arrangeOfCoursesButtons(){
     Column (
         modifier = Modifier
-            .height(650.dp)
+            .height(570.dp)
             .padding(30.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
