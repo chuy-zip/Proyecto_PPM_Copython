@@ -34,9 +34,9 @@ fun SearchCoursesActivityLayout(){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        topTitle("Available Courses")
+        TopTitle("Available Courses")
 
-        scrollableCoursesColumn()
+        ScrollableCoursesColumn()
 
         // Bottom Navigation Bar
         bottomBar()
@@ -44,9 +44,8 @@ fun SearchCoursesActivityLayout(){
 
 }
 
-
 @Composable
-fun scrollableCoursesColumn(){
+fun ScrollableCoursesColumn(){
     Column (
         modifier = Modifier
             .padding(30.dp)

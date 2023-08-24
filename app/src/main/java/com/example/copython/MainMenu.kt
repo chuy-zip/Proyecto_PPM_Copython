@@ -36,22 +36,22 @@ class MainMenu : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            mainMenuLayout()
+            MainMenuLayout()
         }
     }
 }
 
 @Composable
-fun mainMenuLayout(){
+fun MainMenuLayout(){
     Column(
         modifier = Modifier
             .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        topTitle("Current Courses")
+        TopTitle("Current Courses")
 
-        arrangeOfCoursesButtons()
+        ArrangeOfCoursesButtons()
 
         // Bottom Navigation Bar
         bottomBar()
@@ -60,7 +60,7 @@ fun mainMenuLayout(){
 }
 
 @Composable
-fun topTitle(tittle: String){
+fun TopTitle(tittle: String){
     Box(
         modifier = Modifier
             .fillMaxWidth() // Make the Box span the width of the screen
@@ -68,7 +68,7 @@ fun topTitle(tittle: String){
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "$tittle",
+            text = tittle,
             color = Color.White,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
@@ -81,7 +81,7 @@ fun topTitle(tittle: String){
     }
 }
 @Composable
-fun arrangeOfCoursesButtons(){
+fun ArrangeOfCoursesButtons(){
     Column (
         modifier = Modifier
             .height(570.dp)
@@ -183,6 +183,6 @@ fun bottomBar(){
 @Composable
 fun GreetingPreview2() {
     COPYTHONTheme {
-        mainMenuLayout()
+        MainMenuLayout()
     }
 }

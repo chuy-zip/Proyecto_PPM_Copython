@@ -44,9 +44,9 @@ fun CourseExampleLayout(){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        topTitle("Current Courses")
+        TopTitle("Current Courses")
 
-        scrollableTextsColumn()
+        ScrollableTextsColumn()
 
         // Bottom Navigation Bar
         bottomBar()
@@ -55,7 +55,7 @@ fun CourseExampleLayout(){
 }
 
 @Composable
-fun scrollableTextsColumn(){
+fun ScrollableTextsColumn(){
     Column (
         modifier = Modifier
             .padding(30.dp)
