@@ -31,7 +31,6 @@ class CourseExampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
         }
     }
 }
@@ -104,8 +103,6 @@ fun scrollableTextsColumn(){
             fontSize = 16.sp,
             color = Color.Black
         )
-
-
     }
 }
 
