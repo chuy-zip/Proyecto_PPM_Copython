@@ -39,7 +39,7 @@ fun SearchCoursesActivityLayout(){
         ScrollableCoursesColumn()
 
         // Bottom Navigation Bar
-        bottomBar()
+        BottomBar()
     }
 
 }
@@ -52,14 +52,14 @@ fun ScrollableCoursesColumn(){
             .height(570.dp)
             .verticalScroll(rememberScrollState())
     ){
-        courseButton("Introduction to Programming Concepts")
-        courseButton("Variables and Data Types")
-        courseButton("Conditional Statements (if-else)")
-        courseButton("Loops (for and while)")
-        courseButton("Functions and Modular Programming")
-        courseButton("Lists and Arrays")
-        courseButton("Working with Strings")
-        courseButton("Introduction to Object-Oriented Programming")
+        CourseButton("Introduction to Programming Concepts")
+        CourseButton("Variables and Data Types")
+        CourseButton("Conditional Statements (if-else)")
+        CourseButton("Loops (for and while)")
+        CourseButton("Functions and Modular Programming")
+        CourseButton("Lists and Arrays")
+        CourseButton("Working with Strings")
+        CourseButton("Introduction to Object-Oriented Programming")
     }
 }
 

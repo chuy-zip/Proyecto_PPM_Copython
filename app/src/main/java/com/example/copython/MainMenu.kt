@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,7 +51,7 @@ fun MainMenuLayout(){
         ArrangeOfCoursesButtons()
 
         // Bottom Navigation Bar
-        bottomBar()
+        BottomBar()
     }
 
 }
@@ -89,16 +86,16 @@ fun ArrangeOfCoursesButtons(){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        courseButton(courseName = "Basic Concepts of Programming")
-        courseButton(courseName = "This is a button for user Course 2")
-        courseButton(courseName = "This is a button for user Course 3")
+        CourseButton(courseName = "Basic Concepts of Programming")
+        CourseButton(courseName = "This is a button for user Course 2")
+        CourseButton(courseName = "This is a button for user Course 3")
 
     }
 
 }
 
 @Composable
-fun courseButton(courseName: String){
+fun CourseButton(courseName: String){
 
     val newButtonColor = Color(0xFF221387)
 
@@ -121,7 +118,7 @@ fun courseButton(courseName: String){
 }
 
 @Composable
-fun bottomBar(){
+fun BottomBar(){
     Row( modifier = Modifier
         .fillMaxWidth()
         .height(80.dp),
