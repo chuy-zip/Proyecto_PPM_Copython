@@ -35,7 +35,7 @@ class Login : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            LoginLayout()
         }
     }
 }
@@ -47,20 +47,20 @@ fun LoginLayout() {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        TopClouds()
+        TopClouds(232, 175, 48)
         CopythonIcon()
-        EmailInput()
+        EmailInput("Ingresa tu\n\n información")
         PasswordInput()
-        LoginButton()
-        BottomSquare()
+        LoginButton("Iniciar Sesión")
+        BottomSquare("¿Aún no tienes una cuenta?", 51, 97, 172)
     }
 }
 
 @Composable
-fun TopClouds() {
+fun TopClouds(red: Int, green: Int, blue: Int) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .background(Color(232, 175, 48)),
+        .background(Color(red, green, blue)),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -78,9 +78,9 @@ fun CopythonIcon() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmailInput() {
+fun EmailInput(text: String) {
 
-    Text(text = "Ingresa tu\n\n información",
+    Text(text = text,
         textAlign = TextAlign.Center,
         color = Color(51,97,172),
         fontSize = 40.sp,
@@ -119,15 +119,15 @@ fun PasswordInput() {
 }
 
 @Composable
-fun BottomSquare() {
-    Text(text = "¿Aún no tienes una cuenta?",
-        color = Color(51,97,172),
+fun BottomSquare(text: String, red: Int, green: Int, blue: Int) {
+    Text(text = text,
+        color = Color(red, green, blue),
         fontWeight = FontWeight.Black
     )
 
     Box(modifier = Modifier
         .fillMaxWidth()
-        .background(Color(51, 97, 172)),
+        .background(Color(red, green, blue)),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -137,7 +137,7 @@ fun BottomSquare() {
 }
 
 @Composable
-fun LoginButton() {
+fun LoginButton(text: String) {
     OutlinedButton(
         modifier = Modifier.fillMaxWidth(),
         onClick = { /*TODO*/ },
@@ -151,7 +151,7 @@ fun LoginButton() {
             )
         )
         ) {
-        Text(text = "Iniciar Sesión",
+        Text(text = text,
             fontSize = 40.sp)
     }
 }
