@@ -44,7 +44,7 @@ fun CourseExampleLayout(){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        topTitle("Current Courses")
+        topTitle("Introduction to Python")
 
         scrollableTextsColumn()
 
