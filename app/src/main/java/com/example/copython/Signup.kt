@@ -35,7 +35,7 @@ fun SignupLayout() {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        TopClouds(51, 97, 172)
+        TopClouds(51, 97, 172,50,"")
         CopythonIcon()
         EmailInput("Bienvenido")
         PasswordInput()

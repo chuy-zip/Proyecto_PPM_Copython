@@ -47,7 +47,7 @@ fun LoginLayout() {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        TopClouds(232, 175, 48)
+        TopClouds(232, 175, 48,50,"")
         CopythonIcon()
         EmailInput("Ingresa tu\n\n información")
         PasswordInput()
@@ -57,15 +57,15 @@ fun LoginLayout() {
 }
 
 @Composable
-fun TopClouds(red: Int, green: Int, blue: Int) {
+fun TopClouds(red: Int, green: Int, blue: Int, boxSize: Int,username: String) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .background(Color(red, green, blue)),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "",
-            fontSize = 50.sp)
+            text = username,
+            fontSize = boxSize.sp)
     }
 }
 
