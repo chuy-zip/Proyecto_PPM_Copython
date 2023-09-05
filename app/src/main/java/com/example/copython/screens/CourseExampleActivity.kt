@@ -1,4 +1,4 @@
-package com.example.copython
+package com.example.copython.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
