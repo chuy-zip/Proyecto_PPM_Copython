@@ -19,14 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
-class Signup : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            SignupLayout()
-        }
-    }
-}
+
 
 @Composable
 fun SignupLayout() {

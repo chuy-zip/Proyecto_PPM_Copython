@@ -29,14 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
-class MainMenu : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MainMenuLayout()
-        }
-    }
-}
 
 @Composable
 fun MainMenuLayout(){

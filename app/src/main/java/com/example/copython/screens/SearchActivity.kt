@@ -17,14 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
-class SearchActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            SearchCoursesActivityLayout()
-        }
-    }
-}
 
 @Composable
 fun SearchCoursesActivityLayout(){

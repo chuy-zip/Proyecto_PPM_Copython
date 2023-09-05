@@ -32,15 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.example.copython.R
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
-class Login : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            LoginLayout()
-        }
-    }
-}
-
 @Composable
 fun LoginLayout() {
     Column(
