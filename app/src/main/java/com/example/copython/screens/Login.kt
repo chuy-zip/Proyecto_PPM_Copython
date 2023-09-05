@@ -1,4 +1,4 @@
-package com.example.copython
+package com.example.copython.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.copython.R
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 class Login : ComponentActivity() {
