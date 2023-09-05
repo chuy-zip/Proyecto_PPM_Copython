@@ -4,19 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.copython.screens.AIChatActivity
 import com.example.copython.screens.AIChatLayout
-import com.example.copython.screens.CourseExampleActivity
 import com.example.copython.screens.CourseExampleLayout
 import com.example.copython.screens.Login
 import com.example.copython.screens.LoginLayout
-import com.example.copython.screens.MainMenu
 import com.example.copython.screens.MainMenuLayout
-import com.example.copython.screens.SearchActivity
 import com.example.copython.screens.SearchCoursesActivityLayout
 import com.example.copython.screens.Signup
 import com.example.copython.screens.SignupLayout
-import com.example.copython.screens.UserInfo
 import com.example.copython.screens.UserLayout
 
 @Composable
