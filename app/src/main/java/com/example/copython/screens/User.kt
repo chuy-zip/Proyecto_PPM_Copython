@@ -43,7 +43,7 @@ fun UserLayout(navController: NavController){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        UserInfo(tittle = "Hectór")
+        UserInfo(tittle = "Hector")
 
         OptionButton("10 Lessons Learned",navController,AppScreens.MainMenu.route)
         OptionButton("User info", navController, AppScreens.User.route)
