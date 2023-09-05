@@ -15,11 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 
 @Composable
-fun SearchCoursesActivityLayout(){
+fun SearchCoursesActivityLayout(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -28,38 +29,29 @@ fun SearchCoursesActivityLayout(){
     ){
         TopTitle("Available Courses")
 
-        ScrollableCoursesColumn()
+        ScrollableCoursesColumn(navController)
 
         // Bottom Navigation Bar
-        BottomBar()
+        BottomBar(navController)
     }
 
 }
 
 @Composable
-fun ScrollableCoursesColumn(){
+fun ScrollableCoursesColumn(navController: NavController){
     Column (
         modifier = Modifier
             .padding(30.dp)
             .height(570.dp)
             .verticalScroll(rememberScrollState())
     ){
-        CourseButton("Introduction to Programming Concepts")
-        CourseButton("Variables and Data Types")
-        CourseButton("Conditional Statements (if-else)")
-        CourseButton("Loops (for and while)")
-        CourseButton("Functions and Modular Programming")
-        CourseButton("Lists and Arrays")
-        CourseButton("Working with Strings")
-        CourseButton("Introduction to Object-Oriented Programming")
+        CourseButton("Introduction to Programming Concepts",navController)
+        CourseButton("Variables and Data Types",navController)
+        CourseButton("Conditional Statements (if-else)",navController)
+        CourseButton("Loops (for and while)",navController)
+        CourseButton("Functions and Modular Programming",navController)
+        CourseButton("Lists and Arrays",navController)
+        CourseButton("Working with Strings",navController)
+        CourseButton("Introduction to Object-Oriented Programming",navController)
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview3() {
-    COPYTHONTheme {
-        SearchCoursesActivityLayout()
-    }
-
 }

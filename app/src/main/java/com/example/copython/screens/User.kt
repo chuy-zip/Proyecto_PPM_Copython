@@ -28,13 +28,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.copython.R
+import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 
 
 @Composable
-fun UserLayout(){
+fun UserLayout(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -43,12 +45,12 @@ fun UserLayout(){
     ){
         UserInfo(tittle = "Hectór")
 
-        OptionButton("10 Lessons Learned")
-        OptionButton("User info")
-        OptionButton("AI Assistant")
-        OptionButton("Log out")
+        OptionButton("10 Lessons Learned",navController,AppScreens.MainMenu.route)
+        OptionButton("User info", navController, AppScreens.User.route)
+        OptionButton("AI Assistant",navController, AppScreens.AIChatActivity.route)
+        OptionButton("Log out",navController, AppScreens.Login.route)
         // Bottom Navigation Bar
-        BottomBar()
+        BottomBar(navController)
     }
 }
 
@@ -89,10 +91,10 @@ fun UserPhoto() {
 }
 
 @Composable
-fun OptionButton(text: String) {
+fun OptionButton(text: String, navController: NavController, route: String) {
     OutlinedButton(
         modifier = Modifier.width(275.dp),
-        onClick = { /*TODO*/ },
+        onClick = {navController.navigate(route)},
         border = BorderStroke(
             width = 5.dp,
             brush = Brush.horizontalGradient(
@@ -105,13 +107,5 @@ fun OptionButton(text: String) {
     ) {
         Text(text = text,
             fontSize = 30.sp)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun UserPreview(){
-    COPYTHONTheme {
-        UserLayout()
     }
 }

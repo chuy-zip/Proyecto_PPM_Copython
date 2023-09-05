@@ -29,11 +29,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.copython.R
+import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 @Composable
-fun LoginLayout() {
+fun LoginLayout(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -43,7 +45,7 @@ fun LoginLayout() {
         CopythonIcon()
         EmailInput("Ingresa tu\n\n información")
         PasswordInput()
-        LoginButton("Iniciar Sesión")
+        LoginButton("Iniciar Sesión", navController)
         BottomSquare("¿Aún no tienes una cuenta?", 51, 97, 172)
     }
 }
@@ -129,10 +131,10 @@ fun BottomSquare(text: String, red: Int, green: Int, blue: Int) {
 }
 
 @Composable
-fun LoginButton(text: String) {
+fun LoginButton(text: String, navController: NavController) {
     OutlinedButton(
         modifier = Modifier.fillMaxWidth(),
-        onClick = { /*TODO*/ },
+        onClick = {navController.navigate(AppScreens.MainMenu.route)},
         border = BorderStroke(
             width = 5.dp,
             brush = Brush.horizontalGradient(
@@ -145,12 +147,5 @@ fun LoginButton(text: String) {
         ) {
         Text(text = text,
             fontSize = 40.sp)
-    }
-}
-@Preview (showBackground = true)
-@Composable
-fun LoginPreview() {
-    COPYTHONTheme {
-        LoginLayout()
     }
 }

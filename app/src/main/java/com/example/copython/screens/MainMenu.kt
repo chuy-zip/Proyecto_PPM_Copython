@@ -27,11 +27,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 
 @Composable
-fun MainMenuLayout(){
+fun MainMenuLayout(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -40,10 +42,10 @@ fun MainMenuLayout(){
     ){
         TopTitle("Current Courses")
 
-        ArrangeOfCoursesButtons()
+        ArrangeOfCoursesButtons(navController)
 
         // Bottom Navigation Bar
-        BottomBar()
+        BottomBar(navController)
     }
 
 }
@@ -70,7 +72,7 @@ fun TopTitle(tittle: String){
     }
 }
 @Composable
-fun ArrangeOfCoursesButtons(){
+fun ArrangeOfCoursesButtons(navController: NavController){
     Column (
         modifier = Modifier
             .height(570.dp)
@@ -78,21 +80,21 @@ fun ArrangeOfCoursesButtons(){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        CourseButton(courseName = "Basic Concepts of Programming")
-        CourseButton(courseName = "This is a button for user Course 2")
-        CourseButton(courseName = "This is a button for user Course 3")
+        CourseButton(courseName = "Basic Concepts of Programming", navController )
+        CourseButton(courseName = "This is a button for user Course 2", navController)
+        CourseButton(courseName = "This is a button for user Course 3", navController)
 
     }
 
 }
 
 @Composable
-fun CourseButton(courseName: String){
+fun CourseButton(courseName: String, navController: NavController){
 
     val newButtonColor = Color(0xFF221387)
 
     Button(
-        onClick = {},
+        onClick = {navController.navigate(AppScreens.CourseExampleActivity.route)},
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()
@@ -110,14 +112,14 @@ fun CourseButton(courseName: String){
 }
 
 @Composable
-fun BottomBar(){
+fun BottomBar(navController: NavController){
     Row( modifier = Modifier
         .fillMaxWidth()
         .height(80.dp),
         horizontalArrangement = Arrangement.SpaceAround){
 
         Button(
-            onClick = {},
+            onClick = {navController.navigate(AppScreens.MainMenu.route)},
             shape = RectangleShape,
             modifier = Modifier
                 .weight(1f)
@@ -129,7 +131,7 @@ fun BottomBar(){
             Text(text = "Main")
         }
         Button(
-            onClick = {},
+            onClick = {navController.navigate(AppScreens.SearchActivity.route)},
             shape = RectangleShape,
             modifier = Modifier
                 .weight(1f)
@@ -141,7 +143,7 @@ fun BottomBar(){
             Text(text = "Search")
         }
         Button(
-            onClick = {},
+            onClick = {navController.navigate(AppScreens.AIChatActivity.route)},
             shape = RectangleShape,
             modifier = Modifier
                 .weight(1f)
@@ -153,7 +155,7 @@ fun BottomBar(){
             Text(text = "AI")
         }
         Button(
-            onClick = {},
+            onClick = {navController.navigate(AppScreens.User.route)},
             shape = RectangleShape,
             modifier = Modifier
                 .weight(1f)
@@ -165,13 +167,5 @@ fun BottomBar(){
             Text(text = "USER")
         }
 
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview2() {
-    COPYTHONTheme {
-        MainMenuLayout()
     }
 }
