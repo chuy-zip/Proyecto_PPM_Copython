@@ -15,11 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 
 @Composable
-fun SearchCoursesActivityLayout(){
+fun SearchCoursesActivityLayout(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -53,13 +54,4 @@ fun ScrollableCoursesColumn(){
         CourseButton("Working with Strings")
         CourseButton("Introduction to Object-Oriented Programming")
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview3() {
-    COPYTHONTheme {
-        SearchCoursesActivityLayout()
-    }
-
 }

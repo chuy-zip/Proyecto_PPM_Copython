@@ -1,4 +1,4 @@
-package com.example.copython.screens
+ package com.example.copython.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,9 +26,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.copython.navigation.AppScreens
 
-@Composable
-fun AIChatLayout(){
+ @Composable
+fun AIChatLayout(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -38,7 +40,6 @@ fun AIChatLayout(){
         TopTitle("AI Assistant")
 
         ChatStructure()
-
         // Bottom Navigation Bar
         BottomBar()
     }
@@ -118,8 +119,3 @@ fun UserRequestInput() {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun Preview4() {
-    AIChatLayout()
-}

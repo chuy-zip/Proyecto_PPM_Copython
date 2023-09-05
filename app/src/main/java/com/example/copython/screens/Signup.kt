@@ -17,12 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 
 
 @Composable
-fun SignupLayout() {
+fun SignupLayout(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -33,7 +34,7 @@ fun SignupLayout() {
         EmailInput("Bienvenido")
         PasswordInput()
         ConfirmPasswordInput()
-        LoginButton("Registrarse")
+        LoginButton("Registrarse",navController)
         BottomSquare("¿Ya tienes una cuenta? Iniciar sesión.", 232, 175, 48)
     }
 }
@@ -54,12 +55,4 @@ fun ConfirmPasswordInput() {
             focusedLabelColor =  Color(22,47,101)
         )
     )
-}
-
-@Preview (showBackground = true)
-@Composable
-fun SignupPreview() {
-    COPYTHONTheme {
-        SignupLayout()
-    }
 }
