@@ -41,7 +41,7 @@ fun AIChatLayout(navController: NavController){
 
         ChatStructure()
         // Bottom Navigation Bar
-        BottomBar()
+        BottomBar(navController)
     }
 
 }

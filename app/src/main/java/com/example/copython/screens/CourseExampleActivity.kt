@@ -39,7 +39,7 @@ fun CourseExampleLayout(navController: NavController){
         ScrollableTextsColumn()
 
         // Bottom Navigation Bar
-        BottomBar()
+        BottomBar(navController)
     }
 
 }
