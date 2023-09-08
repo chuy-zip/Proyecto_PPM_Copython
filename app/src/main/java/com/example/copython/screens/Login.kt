@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,7 +47,7 @@ fun LoginLayout(navController: NavController) {
         EmailInput("Ingresa tu\n\n información")
         PasswordInput()
         LoginButton("Iniciar Sesión", navController)
-        BottomSquare("¿Aún no tienes una cuenta?", 51, 97, 172)
+        BottomSquare("¿Aún no tienes una cuenta?",navController, AppScreens.Signup.route, 51, 97, 172)
     }
 }
 
@@ -113,10 +114,11 @@ fun PasswordInput() {
 }
 
 @Composable
-fun BottomSquare(text: String, red: Int, green: Int, blue: Int) {
+fun BottomSquare(text: String,navController: NavController, route: String, red: Int, green: Int, blue: Int) {
     Text(text = text,
         color = Color(red, green, blue),
-        fontWeight = FontWeight.Black
+        fontWeight = FontWeight.Black,
+        modifier = Modifier.clickable(onClick = {navController.navigate(route)})
     )
 
     Box(modifier = Modifier

@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
 
 
@@ -35,7 +36,7 @@ fun SignupLayout(navController: NavController) {
         PasswordInput()
         ConfirmPasswordInput()
         LoginButton("Registrarse",navController)
-        BottomSquare("¿Ya tienes una cuenta? Iniciar sesión.", 232, 175, 48)
+        BottomSquare("¿Ya tienes una cuenta? Iniciar sesión.",navController, AppScreens.Login.route, 232, 175, 48)
     }
 }
 
