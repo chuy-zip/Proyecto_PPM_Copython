@@ -45,20 +45,29 @@ programación.
   como más cómoda de utilzar. En conclusión, Firebasees una herramienta con la cual se puede
   ahorrar tiempo y, al mismo tiempo, ofrecer un trabajo de calidad con una gran cantidad de opciones para
   volver más completa a cualquier aplicación.
-- OpenAI. Es un laboratorio de investigación que se enfoca en la Inteligencia Artificial. Este laboratorio
+- OpenAI/Bard. Es un laboratorio de investigación que se enfoca en la Inteligencia Artificial. Este laboratorio
   se volvió popular por su modelo IA llamado ChatGPT (de las siglas en inglés Generative Pre-trained Transformer,
   un chatbot de IA desarrollado en 2022 que se especializa
   en el diálogo. Dicho chatbot ha recibido tanta atención gracias a sus respuestas detalladas y articuladas, a
-  la vez que fue criticado por su presición fáctica.
+  la vez que fue criticado por su presición fáctica. Junto con este también existe Bard, la inteligenci artificial desarrollada
+  por google.
 
   Dentro de las ideas para el desarrollo del proyecto, se sugirió implementar un chat en el cual los usuarios
   serían capaces de hacer preguntas sobre los cursos y les respondería un ser humano. Esta idea fue descartada
   a favor de emplear una IA debido a que no se necesita un equipo de personas que respondan las preguntas, sino
-  que una IA lo haría más eficientemente. Es entonces que entra en juego la API de ChatGPT. Esta API se convirtió
+  que una IA lo haría más eficientemente. Es entonces que entra en juego la API de una inteligenci artificial. Esta API se convirtió
   rápidamente en el enfoque principal para la realización de este chat, ya que, al conectar Chat GPT con la
   aplicación, los usuarios pueden hacerle preguntas y obtener respuestas rápidamente, lo que no intervendría
   demasiado en su aprendizaje. Además de que podrían hasta expandirlo al analizar formas distintas de solucionar
   un mismo problema.
+  Nota: Es importante mencionar que no estmaos aún seguros de realizar las llamadas con la API de chat gpt. Ya que este tiene un costo
+  por cada 1000 tokens generados. Otra alternativa es google Bard, una API totalmente gratis pero que tiene lista de espera para poder
+  utilizarla. Nos hemos inscrito y esperaremos noticios en estos días.
+  Finalmente estamos buscando distintas alternativas con APIs gratuitas. Como una Llamada NOVA AI. La cual es totalmente libre de costos.
+  https://nova-oss.com/
+
+  De no ser posible el uso de inteligencia artificial debido al dificil acceso a esta nueva tecnología, podría llegar a sustituirse por     una funcionalidad menos complicada como la generación de pseudocódigo o FAQ sobre programación.
+ 
 - Implementación de páginas web para mostrar los cursos. Se tiene planeado tener una serie de paginas web preparadas para
   poder mostrar los cursos sugeridos sin que tenga que ser programado directamente en la aplicación, lo cual permitirá agregar
   videos y otros recursos característicos de paginas web. Para realizar esto se usará el concepto de WebView, utilizando
