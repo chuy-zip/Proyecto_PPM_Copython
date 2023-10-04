@@ -62,4 +62,5 @@ programación.
 - Implementación de páginas web para mostrar los cursos. Se tiene planeado tener una serie de paginas web preparadas para
   poder mostrar los cursos sugeridos sin que tenga que ser programado directamente en la aplicación, lo cual permitirá agregar
   videos y otros recursos característicos de paginas web. Para realizar esto se usará el concepto de WebView, utilizando
-  kotlin y java para proyectar la página web. Se implementará compose en vez de xml para el Webview
+  kotlin y java para proyectar la página web. Se implementará compose en vez de xml para el Webview. Este servicio no es
+  necesario el uso de APIs
