@@ -1,4 +1,9 @@
 package com.example.copython.Classes
 
-class BottomBarItem {
-}
+import androidx.compose.ui.graphics.vector.ImageVector
+
+data class BottomBarItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector
+)

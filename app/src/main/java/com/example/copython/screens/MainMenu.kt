@@ -1,8 +1,6 @@
 package com.example.copython.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,40 +11,131 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.copython.Classes.BottomBarItem
 import com.example.copython.navigation.AppScreens
-import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
+import com.example.copython.ui.theme.ui.theme.Blue10
+import com.example.copython.ui.theme.ui.theme.OrangeYellow
 
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainMenuLayout(navController: NavController){
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        TopTitle("Current Courses")
 
-        ArrangeOfCoursesButtons(navController)
+    var currentScreenName by remember { mutableStateOf( "courses") }
 
-        // Bottom Navigation Bar
-        BottomBar(navController)
-    }
+    val screens = listOf(
+        BottomBarItem(
+            title = "Cursos",
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home
+        ),
+        BottomBarItem(
+            title = "Buscar",
+            selectedIcon = Icons.Filled.Search,
+            unselectedIcon = Icons.Outlined.Search
+        ),
+        BottomBarItem(
+            title = "Asistente",
+            selectedIcon = Icons.Filled.Face,
+            unselectedIcon = Icons.Outlined.Face
+        ),BottomBarItem(
+            title = "Perfil",
+            selectedIcon = Icons.Filled.Person,
+            unselectedIcon = Icons.Outlined.Person
+        )
+    )
+
+
+
+    Scaffold (
+        bottomBar = {
+            BottomNavigation (
+                backgroundColor = Blue10,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ){
+                screens.forEach { screen ->
+                    BottomNavigationItem(
+                        label = { Text(text = screen.title, style = TextStyle( color = Color.White)) },
+                        selected = false,
+                        onClick = { currentScreenName = screen.title },
+                        alwaysShowLabel = true,
+                        selectedContentColor = OrangeYellow,
+                        unselectedContentColor = Color.White,
+                        icon = {
+                            Icon(
+                                imageVector = screen.selectedIcon,
+                                contentDescription = screen.title,
+                                tint = Color.White) },
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .size(24.dp),
+
+                    )
+                }
+            }
+        },
+        content = {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "Selected Screen: $currentScreenName")
+            }
+
+        }
+    )
+
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize(),
+//        verticalArrangement = Arrangement.SpaceBetween,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ){
+//        TopTitle("Current Courses")
+//
+//        ArrangeOfCoursesButtons(navController)
+//
+//        // Bottom Navigation Bar
+//        BottomBar(navController)
+//    }
 
 }
 
@@ -55,7 +144,7 @@ fun TopTitle(tittle: String){
     Box(
         modifier = Modifier
             .fillMaxWidth() // Make the Box span the width of the screen
-            .background(Color(51,97,172)), // Set background color for the Box
+            .background(Color(51, 97, 172)), // Set background color for the Box
         contentAlignment = Alignment.Center
     ) {
         Text(
