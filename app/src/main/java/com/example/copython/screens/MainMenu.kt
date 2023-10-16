@@ -36,6 +36,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -99,7 +100,9 @@ fun MainMenuLayout(navController: NavController){
             unselectedIcon = Icons.Outlined.Person
         )
     )
-
+    var selectedItemIndex by rememberSaveable {
+        mutableStateOf(0)
+    }
     Scaffold (
         topBar = {
             TopAppBar(
@@ -117,26 +120,33 @@ fun MainMenuLayout(navController: NavController){
         bottomBar = {
             BottomNavigation (
                 backgroundColor = Blue10,
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             ){
-                screens.forEach { screen ->
+                screens.forEachIndexed { index, screen ->
                     BottomNavigationItem(
-                        label = { Text(text = screen.title, style = TextStyle( color = Color.White)) },
-                        selected = false,
-                        onClick = { currentScreenName = screen.title },
+                        label = {
+                            Text(
+                                text = screen.title,
+                                style = TextStyle( if(index == selectedItemIndex) OrangeYellow else Color.White )
+                            )},
+                        selected = selectedItemIndex == index,
+                        onClick = {
+                            selectedItemIndex = index
+                            currentScreenName = screen.title },
                         alwaysShowLabel = true,
                         selectedContentColor = OrangeYellow,
                         unselectedContentColor = Color.White,
                         icon = {
                             Icon(
-                                imageVector = screen.selectedIcon,
+                                imageVector =  if(index == selectedItemIndex){
+                                    screen.selectedIcon
+                                } else screen.unselectedIcon,
                                 contentDescription = screen.title,
-                                tint = Color.White) },
+                                tint = if(index == selectedItemIndex) OrangeYellow else Color.White,
+                            )},
                         modifier = Modifier
                             .padding(8.dp)
                             .size(24.dp),
-
                     )
                 }
             }
