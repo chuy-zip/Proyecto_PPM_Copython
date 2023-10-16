@@ -27,12 +27,9 @@ fun SearchCoursesActivityLayout(navController: NavController){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        TopTitle("Available Courses")
 
         ScrollableCoursesColumn(navController)
 
-        // Bottom Navigation Bar
-        BottomBar(navController)
     }
 
 }

@@ -37,11 +37,7 @@ fun AIChatLayout(navController: NavController){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        TopTitle("AI Assistant")
-
         ChatStructure()
-        // Bottom Navigation Bar
-        BottomBar(navController)
     }
 
 }

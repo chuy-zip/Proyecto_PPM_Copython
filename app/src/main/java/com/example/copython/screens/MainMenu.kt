@@ -5,9 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,10 +28,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +57,26 @@ import com.example.copython.ui.theme.ui.theme.OrangeYellow
 @Composable
 fun MainMenuLayout(navController: NavController){
 
-    var currentScreenName by remember { mutableStateOf( "courses") }
+    var currentScreenName by remember { mutableStateOf( "Cursos") }
+    var currentScreenTitle by remember { mutableStateOf( "Cursos actuales") }
+
+    when (currentScreenName) {
+        "Cursos" -> {
+           currentScreenTitle = "Cursos Actuales"
+        }
+        "Buscar" -> {
+            currentScreenTitle = "Cursos disponibles"
+        }
+        "Asistente" -> {
+            currentScreenTitle = "Asistente IA"
+        }
+        "Perfil" -> {
+            currentScreenTitle = "Configuraciones y perfil"
+        }
+        else -> {
+            // Code to execute when none of the cases match
+        }
+    }
 
     val screens = listOf(
         BottomBarItem(
@@ -81,9 +100,20 @@ fun MainMenuLayout(navController: NavController){
         )
     )
 
-
-
     Scaffold (
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.largeTopAppBarColors(
+                    containerColor = Blue10,
+                    titleContentColor = Color.White
+                ),
+                title = {
+
+                    Text( currentScreenTitle )
+                }
+
+            )
+        },
         bottomBar = {
             BottomNavigation (
                 backgroundColor = Blue10,
@@ -111,13 +141,23 @@ fun MainMenuLayout(navController: NavController){
                 }
             }
         },
-        content = {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Selected Screen: $currentScreenName")
+        content = {innePadding ->
+            when (currentScreenName) {
+                "Cursos" -> {
+                    ArrangeOfCoursesButtons(navController =  navController, innePadding)
+                }
+                "Buscar" -> {
+                    SearchCoursesActivityLayout(navController = navController)
+                }
+                "Asistente" -> {
+                    AIChatLayout(navController = navController)
+                }
+                "Perfil" -> {
+                    UserLayout(navController = navController)
+                }
+                else -> {
+                    // Code to execute when none of the cases match
+                }
             }
 
         }
@@ -129,12 +169,7 @@ fun MainMenuLayout(navController: NavController){
 //        verticalArrangement = Arrangement.SpaceBetween,
 //        horizontalAlignment = Alignment.CenterHorizontally
 //    ){
-//        TopTitle("Current Courses")
-//
 //        ArrangeOfCoursesButtons(navController)
-//
-//        // Bottom Navigation Bar
-//        BottomBar(navController)
 //    }
 
 }
@@ -161,11 +196,10 @@ fun TopTitle(tittle: String){
     }
 }
 @Composable
-fun ArrangeOfCoursesButtons(navController: NavController){
+fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingValues){
     Column (
         modifier = Modifier
-            .height(570.dp)
-            .padding(30.dp),
+            .padding(innePadding),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
@@ -199,6 +233,7 @@ fun CourseButton(courseName: String, navController: NavController){
     }
 
 }
+
 
 @Composable
 fun BottomBar(navController: NavController){

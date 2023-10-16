@@ -40,17 +40,15 @@ fun UserLayout(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         UserInfo(tittle = "Hector")
 
         OptionButton("10 Lessons Learned",navController,AppScreens.MainMenu.route)
-        OptionButton("User info", navController, AppScreens.User.route)
-        OptionButton("AI Assistant",navController, AppScreens.AIChatActivity.route)
         OptionButton("Log out",navController, AppScreens.Login.route)
         // Bottom Navigation Bar
-        BottomBar(navController)
+
     }
 }
 

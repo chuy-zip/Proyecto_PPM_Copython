@@ -34,12 +34,7 @@ fun CourseExampleLayout(navController: NavController){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        TopTitle("Current Courses")
-
         ScrollableTextsColumn()
-
-        // Bottom Navigation Bar
-        BottomBar(navController)
     }
 
 }
