@@ -60,13 +60,15 @@ fun CourseExampleLayout(navController: NavController){
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowLeft,
                             contentDescription = "Localized description",
-                            tint = Color.White
+                            tint = Color.White,
+                            modifier = Modifier
+                                .padding(2.dp)
+                                .size(60.dp)
+
                         )
                     }
                 },
-                modifier = Modifier
-                    .padding(8.dp)
-                    .size(24.dp)
+
             )
         }
 
