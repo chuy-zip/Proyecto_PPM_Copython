@@ -141,19 +141,19 @@ fun MainMenuLayout(navController: NavController){
                 }
             }
         },
-        content = {innePadding ->
+        content = {innerPadding ->
             when (currentScreenName) {
                 "Cursos" -> {
-                    ArrangeOfCoursesButtons(navController =  navController, innePadding)
+                    ArrangeOfCoursesButtons(navController =  navController, innerPadding)
                 }
                 "Buscar" -> {
-                    SearchCoursesActivityLayout(navController = navController)
+                    SearchCoursesActivityLayout(navController = navController, innerPadding)
                 }
                 "Asistente" -> {
-                    AIChatLayout(navController = navController)
+                    AIChatLayout(navController = navController, innerPadding)
                 }
                 "Perfil" -> {
-                    UserLayout(navController = navController)
+                    UserLayout(navController = navController, innerPadding)
                 }
                 else -> {
                     // Code to execute when none of the cases match
@@ -162,15 +162,6 @@ fun MainMenuLayout(navController: NavController){
 
         }
     )
-
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize(),
-//        verticalArrangement = Arrangement.SpaceBetween,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ){
-//        ArrangeOfCoursesButtons(navController)
-//    }
 
 }
 
@@ -229,7 +220,9 @@ fun CourseButton(courseName: String, navController: NavController){
         Text(
             fontSize = 20.sp,
             text = courseName,
-            textAlign = TextAlign.Start)
+            textAlign = TextAlign.Left,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
     }
 
 }
