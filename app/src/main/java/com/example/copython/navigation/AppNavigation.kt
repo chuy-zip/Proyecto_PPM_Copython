@@ -6,11 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.copython.screens.AIChatLayout
 import com.example.copython.screens.CourseExampleLayout
-import com.example.copython.screens.Login
 import com.example.copython.screens.LoginLayout
 import com.example.copython.screens.MainMenuLayout
-import com.example.copython.screens.SearchCoursesActivityLayout
-import com.example.copython.screens.Signup
 import com.example.copython.screens.SignupLayout
 import com.example.copython.screens.UserLayout
 
@@ -31,20 +28,9 @@ fun AppNavigation(){
             MainMenuLayout(navController)
         }
 
-        composable(route = AppScreens.SearchAtivity.route) {
-            SearchCoursesActivityLayout(navController)
-        }
-
-        composable(route = AppScreens.AIChatActivity.route) {
-            AIChatLayout(navController)
-        }
-
         composable(route = AppScreens.CourseExampleActivity.route) {
             CourseExampleLayout(navController)
         }
 
-        composable(route = AppScreens.User.route) {
-            UserLayout(navController)
-        }
     }
 }

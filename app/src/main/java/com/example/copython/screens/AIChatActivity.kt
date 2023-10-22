@@ -1,12 +1,10 @@
-package com.example.copython.screens
+ package com.example.copython.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,33 +21,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
-class AIChatActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AIChatLayout()
-        }
-    }
-}
-
-@Composable
-fun AIChatLayout(){
+ @Composable
+fun AIChatLayout(navController: NavController, innerPadding: PaddingValues){
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .padding(innerPadding),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        TopTitle("AI Assistant")
-
         ChatStructure()
-
-        // Bottom Navigation Bar
-        BottomBar()
     }
 
 }
@@ -57,7 +41,7 @@ fun AIChatLayout(){
 @Composable()
 fun ChatStructure(){
     Box( modifier = Modifier
-        .height(600.dp)
+        .fillMaxSize()
         .padding(30.dp)
         .fillMaxWidth()
         .background(color = Color.LightGray, shape = RoundedCornerShape(16.dp))
@@ -87,7 +71,7 @@ fun ChatStructure(){
                 ChatBox(red = 232, green = 175, blue = 48, message = "Muchas gracias!", _textAlign = TextAlign.Right)
             }
 
-            Spacer(modifier = Modifier.height(180.dp))
+            Spacer(modifier = Modifier.height(370.dp))
 
             UserRequestInput()
 
@@ -127,8 +111,3 @@ fun UserRequestInput() {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun Preview4() {
-    AIChatLayout()
-}

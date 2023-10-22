@@ -1,13 +1,12 @@
 package com.example.copython.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,37 +24,26 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.copython.R
-import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
-
-class User : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            UserLayout()
-        }
-    }
-}
+import com.example.copython.navigation.AppScreens
 
 @Composable
-fun UserLayout(){
+fun UserLayout(navController: NavController, innerPadding: PaddingValues){
     Column(
         modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween,
+            .padding(innerPadding),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        UserInfo(tittle = "Hectór")
-
-        OptionButton("10 Lessons Learned")
-        OptionButton("User info")
-        OptionButton("AI Assistant")
-        OptionButton("Log out")
+        UserInfo(tittle = "Hector")
+        Spacer(modifier = Modifier.height(40.dp))
+        OptionButton("10 Lessons Learned",navController,AppScreens.MainMenu.route)
+        Spacer(modifier = Modifier.height(20.dp))
+        OptionButton("Log out",navController, AppScreens.Login.route)
         // Bottom Navigation Bar
-        BottomBar()
     }
 }
 
@@ -63,7 +51,7 @@ fun UserLayout(){
 fun UserInfo(tittle: String){
     Column(
         modifier = Modifier
-            .size(400.dp)
+            .size(420.dp)
             .fillMaxWidth() // Make the Box span the width of the screen
             .background(Color(51, 97, 172)), // Set background color for the Box
         verticalArrangement = Arrangement.Bottom,
@@ -79,7 +67,6 @@ fun UserInfo(tittle: String){
             modifier = Modifier
                 .padding(16.dp)
                 .height(60.dp)
-
         )
     }
 }
@@ -96,10 +83,10 @@ fun UserPhoto() {
 }
 
 @Composable
-fun OptionButton(text: String) {
+fun OptionButton(text: String, navController: NavController, route: String) {
     OutlinedButton(
         modifier = Modifier.width(275.dp),
-        onClick = { /*TODO*/ },
+        onClick = {navController.navigate(route)},
         border = BorderStroke(
             width = 5.dp,
             brush = Brush.horizontalGradient(
@@ -112,13 +99,5 @@ fun OptionButton(text: String) {
     ) {
         Text(text = text,
             fontSize = 30.sp)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun UserPreview(){
-    COPYTHONTheme {
-        UserLayout()
     }
 }
