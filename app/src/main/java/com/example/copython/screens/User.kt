@@ -38,20 +38,11 @@ fun UserLayout(navController: NavController, innerPadding: PaddingValues){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-<<<<<<< Updated upstream
         UserInfo(tittle = "Hector")
         Spacer(modifier = Modifier.height(40.dp))
         OptionButton("10 Lessons Learned",navController,AppScreens.MainMenu.route)
         Spacer(modifier = Modifier.height(20.dp))
         OptionButton("Log out",navController, AppScreens.Login.route)
-=======
-        UserInfo(tittle = "Héctor")
-
-        OptionButton("10 Lessons Learned")
-        OptionButton("User info")
-        OptionButton("AI Assistant")
-        OptionButton("Log out")
->>>>>>> Stashed changes
         // Bottom Navigation Bar
     }
 }
