@@ -1,8 +1,5 @@
 package com.example.copython.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,11 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.copython.navigation.AppScreens
-import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
-
 
 
 @Composable
@@ -32,12 +26,17 @@ fun SignupLayout(navController: NavController) {
     {
         TopClouds(51, 97, 172,50,"")
         CopythonIcon()
-        EmailInput("Bienvenido")
-        PasswordInput()
+        emailInput("Bienvenido")
+        passwordInput()
         ConfirmPasswordInput()
-        LoginButton("Registrarse",navController)
+        SignUpnButton("Registrarse",navController)
         BottomSquare("¿Ya tienes una cuenta? Iniciar sesión.",navController, AppScreens.Login.route, 232, 175, 48)
     }
+}
+
+@Composable
+fun SignUpnButton(s: String, navController: NavController) {
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

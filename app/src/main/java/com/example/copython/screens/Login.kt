@@ -1,8 +1,7 @@
 package com.example.copython.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,10 +19,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -32,9 +36,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.R
+import com.example.copython.navigation.AppNavigation
 import com.example.copython.navigation.AppScreens
-import com.example.copython.ui.theme.ui.theme.COPYTHONTheme
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
+val auth: FirebaseAuth = Firebase.auth
 @Composable
 fun LoginLayout(navController: NavController) {
     Column(
@@ -44,9 +52,9 @@ fun LoginLayout(navController: NavController) {
     {
         TopClouds(232, 175, 48,50,"")
         CopythonIcon()
-        EmailInput("Ingresa tu\n\n información")
-        PasswordInput()
-        LoginButton("Iniciar Sesión", navController)
+        val emailInput = emailInput("Ingresa tu\n\n información")
+        val password = passwordInput()
+        LoginButton("Iniciar Sesión", navController, emailInput, password, LocalContext.current)
         BottomSquare("¿Aún no tienes una cuenta?",navController, AppScreens.Signup.route, 51, 97, 172)
     }
 }
@@ -73,7 +81,7 @@ fun CopythonIcon() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmailInput(text: String) {
+fun emailInput(text: String): String {
 
     Text(text = text,
         textAlign = TextAlign.Center,
@@ -82,7 +90,7 @@ fun EmailInput(text: String) {
         fontWeight = FontWeight.Black
     )
 
-    var userEmail = ""
+    var userEmail by rememberSaveable { mutableStateOf("") }
     TextField(value = userEmail,
         modifier = Modifier.fillMaxWidth(),
         onValueChange = {userEmail = it},
@@ -93,12 +101,13 @@ fun EmailInput(text: String) {
             containerColor = Color(232,199,102),
             unfocusedLabelColor = Color(51,97,172))
     )
+    return userEmail
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordInput() {
-    var userPassword = ""
+fun passwordInput(): String {
+    var userPassword by rememberSaveable { mutableStateOf("") }
     TextField(value = userPassword,
         modifier = Modifier.fillMaxWidth(),
         shape = CircleShape,
@@ -111,6 +120,7 @@ fun PasswordInput() {
             focusedLabelColor =  Color(22,47,101)
         )
     )
+    return userPassword
 }
 
 @Composable
@@ -133,10 +143,10 @@ fun BottomSquare(text: String,navController: NavController, route: String, red: 
 }
 
 @Composable
-fun LoginButton(text: String, navController: NavController) {
+fun LoginButton(text: String, navController: NavController, userEmail: String, userPassword: String, context: Context) {
     OutlinedButton(
         modifier = Modifier.fillMaxWidth(),
-        onClick = {navController.navigate(AppScreens.MainMenu.route)},
+        onClick = { loginFun(userEmail, userPassword, context, navController) },
         border = BorderStroke(
             width = 5.dp,
             brush = Brush.horizontalGradient(
@@ -150,4 +160,28 @@ fun LoginButton(text: String, navController: NavController) {
         Text(text = text,
             fontSize = 40.sp)
     }
+}
+
+private fun loginFun(email: String, password: String, context: Context, navController: NavController) {
+
+    if (email.isBlank() || password.isBlank()) {
+        Toast.makeText(context, "Asegúrate de llenar todos los campos", Toast.LENGTH_LONG).show()
+        return
+    }
+
+    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+        if (it.isSuccessful) {
+            Toast.makeText(context, "Iniciaste sesión correctamente", Toast.LENGTH_LONG).show()
+            navController.navigate(route = AppScreens.MainMenu.route)
+
+        } else {
+            Toast.makeText(context, "Correo o contraseña inválidos.", Toast.LENGTH_LONG).show()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun LoginPreview() {
+    AppNavigation()
 }
