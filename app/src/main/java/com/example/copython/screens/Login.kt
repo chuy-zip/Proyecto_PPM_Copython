@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -30,6 +31,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -91,9 +94,8 @@ fun emailInput(text: String): String {
     )
 
     var userEmail by rememberSaveable { mutableStateOf("") }
-    TextField(value = userEmail,
-        modifier = Modifier.fillMaxWidth(),
-        onValueChange = {userEmail = it},
+    TextField(value = userEmail, onValueChange = {userEmail = it},
+        singleLine = true,
         shape = CircleShape,
         label = {Text("Correo Electrónico") },
         colors = TextFieldDefaults.textFieldColors(
@@ -109,7 +111,7 @@ fun emailInput(text: String): String {
 fun passwordInput(): String {
     var userPassword by rememberSaveable { mutableStateOf("") }
     TextField(value = userPassword,
-        modifier = Modifier.fillMaxWidth(),
+        singleLine = true,
         shape = CircleShape,
         onValueChange = {userPassword = it},
         label = {Text("Contraseña") },
@@ -117,8 +119,9 @@ fun passwordInput(): String {
             textColor = Color(22,47,101),
             containerColor = Color(232,175,48),
             unfocusedLabelColor = Color(51,97,172),
-            focusedLabelColor =  Color(22,47,101)
-        )
+            focusedLabelColor =  Color(22,47,101)),
+        visualTransformation = PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
     )
     return userPassword
 }
@@ -145,7 +148,6 @@ fun BottomSquare(text: String,navController: NavController, route: String, red: 
 @Composable
 fun LoginButton(text: String, navController: NavController, userEmail: String, userPassword: String, context: Context) {
     OutlinedButton(
-        modifier = Modifier.fillMaxWidth(),
         onClick = { loginFun(userEmail, userPassword, context, navController) },
         border = BorderStroke(
             width = 5.dp,
