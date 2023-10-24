@@ -1,13 +1,16 @@
 package com.example.copython.screens
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -50,9 +53,33 @@ class MainActivity : ComponentActivity() {
                                         intent = result.data?: return@launch
                                     )
                                     viewModel.onSignInResult(signInResult)
+                                    if(state.isSignInSuccessful){
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "Sign in successful",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
                                 }
                             }
+                        }
+                    )
+                    
+                    LaunchedEffect(key1 = state.isSignInSuccessful){
 
+                    }
+
+                    SignInScreen(
+                        state = state,
+                        onSignInClick = {
+                            lifecycleScope.launch {
+                                val signIntentSender = googleAuthUiClient.signIn()
+                                launcher.launch(
+                                    IntentSenderRequest.Builder(
+                                        signIntentSender ?: return@launch
+                                    ).build()
+                                )
+                            }
                         }
                     )
                 }
