@@ -87,6 +87,8 @@ fun confirmPasswordInput(): String {
     return userPassword
 }
 
+
+
 private fun signupFun(email: String, password: String, passwordVerification: String, context: Context, navController: NavController) {
 
     if (email.isBlank() || password.isBlank()) {

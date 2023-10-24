@@ -8,4 +8,5 @@ sealed class AppScreens (val route: String){
     object SearchActivity: AppScreens("search_screen")
     object Signup: AppScreens("signup_screen")
     object User: AppScreens("user_screen")
+    object GoogleSignIn: AppScreens("google")
 }
