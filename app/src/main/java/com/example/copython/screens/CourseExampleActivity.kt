@@ -1,5 +1,8 @@
 package com.example.copython.screens
 
+import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +33,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.copython.ui.theme.ui.theme.Blue10
 
@@ -42,7 +46,7 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-2",
         "https://sonrietuexistes555.wixsite.com/copythonapp/mi-blog"
     )
-    val courseT: Int = Integer.parseInt(courseToken)
+    val courseTk: Int = Integer.parseInt(courseToken)
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -153,4 +157,23 @@ fun ScrollableTextsColumn(innerPadding: PaddingValues) {
             )
         }
     }
+}
+
+@Composable
+fun WebContent(urlWeb: String) {
+
+    // Adding a WebView inside AndroidView
+    // with layout as full screen
+    AndroidView(factory = {
+        WebView(it).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            webViewClient = WebViewClient()
+            loadUrl(urlWeb)
+        }
+    }, update = {
+        it.loadUrl(urlWeb)
+    })
 }
