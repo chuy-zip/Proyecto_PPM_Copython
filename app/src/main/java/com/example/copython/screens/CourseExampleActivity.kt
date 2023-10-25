@@ -36,7 +36,14 @@ import com.example.copython.ui.theme.ui.theme.Blue10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CourseExampleLayout(navController: NavController){
+fun CourseExampleLayout(navController: NavController, courseToken: String?){
+    val coursesList = arrayListOf<String>(
+        "https://sonrietuexistes555.wixsite.com/copythonapp",
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-2",
+        "https://sonrietuexistes555.wixsite.com/copythonapp/mi-blog"
+    )
+    val courseT: Int = Integer.parseInt(courseToken)
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold (
