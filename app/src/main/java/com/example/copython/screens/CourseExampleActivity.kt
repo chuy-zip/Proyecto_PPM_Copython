@@ -46,7 +46,11 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-2",
         "https://sonrietuexistes555.wixsite.com/copythonapp/mi-blog"
     )
-    val courseTk: Int = Integer.parseInt(courseToken)
+    var courseTk: Int = Integer.parseInt(courseToken)
+
+    if (courseTk>=coursesList.size){
+        courseTk = 0
+    }
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -95,68 +99,6 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
 //        ScrollableTextsColumn()
 //    }
 
-}
-
-@Composable
-fun ScrollableTextsColumn(innerPadding: PaddingValues) {
-    Column (
-        modifier = Modifier
-            .padding(innerPadding)
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-    ){
-        Text(
-            text = """
-                Python is a popular programming language known for its simplicity and readability. It is often used for web development, data analysis, artificial intelligence, and more.
-
-                Here's the classic "Hello, World!" program in Python:
-                
-                """.trimIndent(),
-            fontSize = 16.sp,
-            color = Color.Black
-        )
-
-        Box( modifier = Modifier
-            .height(50.dp)
-            .fillMaxWidth()
-            .background(color = Color.LightGray, shape = RoundedCornerShape(16.dp))
-        ){
-            Text(
-                text = "\n  printf('Hello World')"
-            )
-        }
-
-        Spacer(modifier = Modifier.padding(bottom = 25.dp)) // Add padding below the Box
-
-
-        Box( modifier = Modifier
-            .height(100.dp)
-            .fillMaxWidth()
-            .background(color = Color.LightGray, shape = RoundedCornerShape(16.dp))
-        ){
-            Text(
-                text = " \n Output: \n\n Hello World"
-            )
-        }
-
-        Text(
-            text = """
-                This program prints the text "Hello, World!" to the console. It's often the first program beginners write when learning a new programming language.
-            """.trimIndent(),
-            fontSize = 16.sp,
-            color = Color.Black
-        )
-
-        Box( modifier = Modifier
-            .height(500.dp)
-            .fillMaxWidth()
-            .background(color = Color.LightGray, shape = RoundedCornerShape(16.dp))
-        ){
-            Text(
-                text = " Caja de prueba para el scroll"
-            )
-        }
-    }
 }
 
 @Composable
