@@ -84,7 +84,7 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
         }
 
     ){ innerPadding ->
-        ScrollableTextsColumn(innerPadding)
+        WebContent(coursesList[courseTk],innerPadding)
     }
 //    Column(
 //        modifier = Modifier
@@ -160,8 +160,13 @@ fun ScrollableTextsColumn(innerPadding: PaddingValues) {
 }
 
 @Composable
-fun WebContent(urlWeb: String) {
-
+fun WebContent(urlWeb: String, innerPadding: PaddingValues) {
+    Column(
+        modifier = Modifier
+            .padding(innerPadding)
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+    ){}
     // Adding a WebView inside AndroidView
     // with layout as full screen
     AndroidView(factory = {
