@@ -6,7 +6,7 @@ sealed class AppScreens (val route: String){
     object Login: AppScreens("login_screen")
     object MainMenu: AppScreens("mainMenu_screen")
     object SearchActivity: AppScreens("search_screen")
-    object Signup: AppScreens("signup_screen")
+    object SignInScreen: AppScreens("signup_screen")
     object User: AppScreens("user_screen")
     object GoogleSignIn: AppScreens("google")
 }

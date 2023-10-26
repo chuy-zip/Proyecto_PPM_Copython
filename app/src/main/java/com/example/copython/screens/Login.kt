@@ -58,7 +58,7 @@ fun LoginLayout(navController: NavController) {
         val emailInput = emailInput("Ingresa tu\n\n información")
         val password = passwordInput()
         LoginButton("Iniciar Sesión", navController, emailInput, password, LocalContext.current)
-        BottomSquare("¿Aún no tienes una cuenta?",navController, AppScreens.Signup.route, 51, 97, 172)
+        BottomSquare("¿Aún no tienes una cuenta?",navController, AppScreens.SignInScreen.route, 51, 97, 172)
     }
 }
 
@@ -131,7 +131,15 @@ fun BottomSquare(text: String,navController: NavController, route: String, red: 
     Text(text = text,
         color = Color(red, green, blue),
         fontWeight = FontWeight.Black,
-        modifier = Modifier.clickable(onClick = {navController.navigate(route)})
+        modifier = Modifier.clickable(
+            onClick = {
+                if(route == AppScreens.SignInScreen.route){
+                    navController.popBackStack()
+                }else{
+                    navController.navigate(route)
+                }
+            }
+        )
     )
 
     Box(modifier = Modifier

@@ -39,7 +39,7 @@ fun AppNavigation(){
             LoginLayout(navController)
         }
 
-        composable(route = AppScreens.Signup.route,
+        composable(route = AppScreens.SignInScreen.route,
             enterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
