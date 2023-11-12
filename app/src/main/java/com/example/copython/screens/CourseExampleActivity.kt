@@ -44,7 +44,11 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
     val coursesList = arrayListOf<String>(
         "https://sonrietuexistes555.wixsite.com/copythonapp",
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-2",
-        "https://sonrietuexistes555.wixsite.com/copythonapp/mi-blog"
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-3",
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-4",
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-5",
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-6",
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-7"
     )
     var courseTk: Int = Integer.parseInt(courseToken)
 

@@ -204,9 +204,9 @@ fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingVa
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        CourseButton(courseName = "Basics of Variables", navController, "0" )
-        CourseButton(courseName = "This is a button for user Course 2", navController, "1")
-        CourseButton(courseName = "This is a button for user Course 3", navController, "2")
+        CourseButton(courseName = "Variables y sus tipos", navController, "0" )
+        CourseButton(courseName = "IF-ELSE y sus condiciones", navController, "1")
+        CourseButton(courseName = "Ciclos y como usarlos", navController, "2")
 
     }
 
