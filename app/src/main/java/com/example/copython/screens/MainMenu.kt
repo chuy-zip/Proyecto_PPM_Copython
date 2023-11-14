@@ -204,21 +204,21 @@ fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingVa
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        CourseButton(courseName = "Variables y sus tipos", navController, "0" )
-        CourseButton(courseName = "IF-ELSE y sus condiciones", navController, "1")
-        CourseButton(courseName = "Ciclos y como usarlos", navController, "2")
+        CourseButton(courseName = "Basic Concepts of Programming", navController )
+        CourseButton(courseName = "This is a button for user Course 2", navController)
+        CourseButton(courseName = "This is a button for user Course 3", navController)
 
     }
 
 }
 
 @Composable
-fun CourseButton(courseName: String, navController: NavController, courseToken:String){
+fun CourseButton(courseName: String, navController: NavController){
 
     val newButtonColor = Color(0xFF221387)
 
     Button(
-        onClick = {navController.navigate(route = AppScreens.CourseExampleActivity.route + "/$courseToken")},
+        onClick = {navController.navigate(AppScreens.CourseExampleActivity.route)},
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()
