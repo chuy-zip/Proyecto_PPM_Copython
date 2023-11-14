@@ -53,7 +53,9 @@ fun AIChatLayout(
                  focusedBorderColor = DarkBlue10,
                  unfocusedBorderColor = OrangeYellow
              ),
-             label = { Text("Escribe tu pregunta:")
+             label = { Text(
+                 text="Escribe tu pregunta en ingles:",
+                 color= DarkBlue10)
              }
          )
          Button(
