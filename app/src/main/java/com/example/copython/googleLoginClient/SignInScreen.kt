@@ -38,9 +38,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.loginlab4.R
-import com.example.loginlab4.auth
-import com.example.loginlab4.ui.theme.AppScreens
+import com.example.copython.R
+import com.example.copython.navigation.AppScreens
+import com.example.copython.screens.auth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,10 +59,6 @@ fun SignInScreen(
             //).show()
         }
     }
-
-    Image(painter = painterResource(id = R.drawable.login_screen), contentDescription = "Login Screen",
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop)
 
     Column (
         modifier = Modifier
@@ -151,6 +147,7 @@ fun SignInScreen(
                 ),
                 onClick = {
                     navController.navigate(route = AppScreens.SignupScreen.route)
+                    navController.navigate(route = AppScreens.Signup.route)
                 }) {
 
                 Text(text = "REGISTRO",
@@ -171,8 +168,7 @@ private fun loginFun(email: String, password: String, context: Context, navContr
     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
         if (it.isSuccessful) {
             Toast.makeText(context, "Iniciaste sesión correctamente", Toast.LENGTH_LONG).show()
-            navController.navigate(route = AppScreens.ProfileScreen.route)
-
+            navController.navigate(route = AppScreens.MainMenu.route)
         } else {
             Toast.makeText(context, "Correo o contraseña inválidos.", Toast.LENGTH_LONG).show()
         }
