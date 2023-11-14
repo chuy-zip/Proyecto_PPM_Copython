@@ -38,7 +38,7 @@ fun UserLayout(navController: NavController, innerPadding: PaddingValues){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        UserInfo(tittle = "Hector")
+        UserInfo(tittle = "Héctor")
         Spacer(modifier = Modifier.height(40.dp))
         OptionButton("10 Lessons Learned",navController,AppScreens.MainMenu.route)
         Spacer(modifier = Modifier.height(20.dp))

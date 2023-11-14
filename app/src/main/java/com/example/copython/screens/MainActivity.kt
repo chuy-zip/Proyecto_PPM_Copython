@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-    private val googleAuthUiClient by lazy{
+    private val googleAuthUiClient by lazy {
         GoogleAuthUiClient(
             context = applicationContext,
             oneTapClient = Identity.getSignInClient(applicationContext)
@@ -79,20 +79,18 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    SignInScreen(
-                        state = state,
-                        onSignInClick = {
-                            lifecycleScope.launch {
-                                val signIntentSender = googleAuthUiClient.signIn()
-                                launcher.launch(
-                                    IntentSenderRequest.Builder(
-                                        signIntentSender ?: return@launch
-                                    ).build()
-                                )
-                            }
-                        },
-                        navController
-                    )
+                    GoogleLogin(
+                        state = state
+                    ) {
+                        lifecycleScope.launch {
+                            val signIntentSender = googleAuthUiClient.signIn()
+                            launcher.launch(
+                                IntentSenderRequest.Builder(
+                                    signIntentSender ?: return@launch
+                                ).build()
+                            )
+                        }
+                    }
                 }
                 composable(route = "profile"){
                     ProfileScreen(
@@ -131,7 +129,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable(route = AppScreens.CourseExampleActivity.route) {
-                    CourseExampleLayout(navController)
+                    CourseExampleLayout(navController, "2")
                 }
             }
         }

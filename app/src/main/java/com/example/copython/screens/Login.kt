@@ -14,12 +14,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,12 +36,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.R
-import com.example.copython.navigation.AppNavigation
+import com.example.copython.googleLogin.SignInState
 import com.example.copython.navigation.AppScreens
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -172,6 +173,33 @@ fun LoginButton(text: String, navController: NavController, userEmail: String, u
     }
 }
 
+@Composable
+fun GoogleLogin(
+    state: SignInState,
+    onSignInClick: () -> Unit
+){
+    val context = LocalContext.current
+    LaunchedEffect(key1 = state.signInError){
+        state.signInError?.let {error ->
+            Toast.makeText(
+                context,
+                error,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
+        Button(onClick = onSignInClick) {
+            Text(text = "Sign In with google")
+        }
+    }
+}
+
 private fun loginFun(email: String, password: String, context: Context, navController: NavController) {
 
     if (email.isBlank() || password.isBlank()) {
@@ -188,10 +216,4 @@ private fun loginFun(email: String, password: String, context: Context, navContr
             Toast.makeText(context, "Correo o contraseña inválidos.", Toast.LENGTH_LONG).show()
         }
     }
-}
-
-@Preview
-@Composable
-fun LoginPreview() {
-    AppNavigation()
 }
