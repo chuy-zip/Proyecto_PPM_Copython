@@ -1,113 +1,88 @@
  package com.example.copython.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.copython.Classes.MainViewModel
+import com.example.copython.ui.theme.ui.theme.DarkBlue10
+import com.example.copython.ui.theme.ui.theme.OrangeYellow
+
 
  @Composable
-fun AIChatLayout(navController: NavController, innerPadding: PaddingValues){
-    Column(
-        modifier = Modifier
-            .padding(innerPadding),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        ChatStructure()
-    }
+fun AIChatLayout(
+     navController: NavController,
+     innerPadding: PaddingValues,
+     viewModel: MainViewModel = viewModel()
+     ){
+     val (inputText, setInputText) = remember { mutableStateOf("") }
+     val textOutput: String by viewModel.output.collectAsState()
+     Column(
+         modifier = Modifier
+             .padding(innerPadding)
+             .verticalScroll(rememberScrollState()),
+         verticalArrangement = Arrangement.SpaceBetween,
+         horizontalAlignment = Alignment.CenterHorizontally,
 
-}
+     ){
+         OutlinedTextField(
+             modifier = Modifier.fillMaxWidth(),
+             value = inputText,
+             onValueChange = setInputText,
+             colors= TextFieldDefaults.outlinedTextFieldColors(
+                 focusedBorderColor = DarkBlue10,
+                 unfocusedBorderColor = OrangeYellow
+             ),
+             label = { Text("Escribe tu pregunta:")
+             }
+         )
+         Button(
+             onClick = {
+                 viewModel.sendPrompt(inputText)
+             },
+             modifier = Modifier.padding(8.dp),
+             colors = ButtonDefaults.buttonColors(
+                 backgroundColor = OrangeYellow,
+                 contentColor= Color.White
+             )
 
-@Composable()
-fun ChatStructure(){
-    Box( modifier = Modifier
-        .fillMaxSize()
-        .padding(30.dp)
-        .fillMaxWidth()
-        .background(color = Color.LightGray, shape = RoundedCornerShape(16.dp))
-    ){
-        Column ( modifier = Modifier
-        ){
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ){
-                ChatBox(red = 232, green = 175, blue = 48, message = "Me podrias explicar que es una lista en progra?", _textAlign = TextAlign.Right)
-            }
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
-            ){
-                ChatBox(red = 135, green = 206, blue = 235, message = "En programación, una lista es una colección ordenada de elementos (números, palabras u otros datos). Funciona como una lista de compras: agregas elementos y se mantienen en el mismo orden. Puedes añadir, eliminar y acceder a los elementos por su posición.", _textAlign = TextAlign.Left)
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ){
-                ChatBox(red = 232, green = 175, blue = 48, message = "Muchas gracias!", _textAlign = TextAlign.Right)
-            }
-
-            Spacer(modifier = Modifier.height(370.dp))
-
-            UserRequestInput()
-
-        }
-
-    }
-}
-
-@Composable
-fun ChatBox(red: Int, green: Int, blue: Int, message: String, _textAlign: TextAlign){
-
-    Box(
-        modifier = Modifier
-            .padding(10.dp)
-            .background(Color(red, green, blue), shape = RoundedCornerShape(16.dp))
-        ) {
-        Text(
-            fontSize = 12.sp,
-            text = message,
-            textAlign = _textAlign,
-            modifier = Modifier.padding(16.dp))
-    }
-
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun UserRequestInput() {
-    var request = ""
-    TextField(value = request,
-        modifier = Modifier.fillMaxWidth(),
-        onValueChange = {request = it},
-        label = {Text("Type your request here") },
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = Color.Black,
-            containerColor = Color.LightGray)
-    )
+         ) {
+             Text("Enviar")
+         }
+         Card(
+             modifier = Modifier
+                 .padding(vertical = 2.dp)
+                 .fillMaxWidth()
+         ) {
+             Column(
+                 modifier = Modifier.padding(8.dp)
+             ) {
+                 Text(
+                     modifier = Modifier.fillMaxWidth(),
+                     text = textOutput
+                 )
+             }
+         }
+     }
 }
 

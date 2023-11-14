@@ -1,9 +1,7 @@
 package com.example.copython.Classes
 
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.copython.R
 import com.google.ai.generativelanguage.v1beta3.GenerateTextRequest
 import com.google.ai.generativelanguage.v1beta3.TextPrompt
 import com.google.ai.generativelanguage.v1beta3.TextServiceClient
@@ -27,14 +25,20 @@ class MainViewModel: ViewModel() {
     init {
         // Initialize the Text Service Client
         client = initializeTextServiceClient(
-            apiKey = "apikeytest"
+            apiKey = "test"
         )
 
         // Create the text prompt
-        val prompt = createPrompt("Repeat after me: one, two")
+        val prompt = createPrompt("Make a friendly greeting followed by the question: ready to learn?")
 
         // Send the first request
         val request = createTextRequest(prompt)
+        generateText(request)
+    }
+    fun sendPrompt(prompt: String) {
+        // Reuse the logic from init to send a prompt
+        val textPrompt = createPrompt(prompt)
+        val request = createTextRequest(textPrompt)
         generateText(request)
     }
     private fun initializeTextServiceClient(
