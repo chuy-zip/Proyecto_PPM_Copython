@@ -1,4 +1,4 @@
-package com.example.copython.Google
+package com.example.copython.googleLogin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

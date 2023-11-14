@@ -1,4 +1,4 @@
-package com.example.copython.Google
+package com.example.copython.googleLogin
 
 import android.content.Context
 import android.content.Intent
@@ -16,6 +16,7 @@ import java.util.concurrent.CancellationException
 class GoogleAuthUiClient (
     private val context: Context,
     private val oneTapClient: SignInClient
+
     ){
     private val auth = Firebase.auth
 

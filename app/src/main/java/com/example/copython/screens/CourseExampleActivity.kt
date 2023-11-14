@@ -41,7 +41,7 @@ import com.example.copython.ui.theme.ui.theme.Blue10
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CourseExampleLayout(navController: NavController, courseToken: String?){
-    val coursesList = arrayListOf<String>(
+    val coursesList = arrayListOf(
         "https://sonrietuexistes555.wixsite.com/copythonapp",
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-2",
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-3",
@@ -50,10 +50,12 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-6",
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-7"
     )
-    var courseTk: Int = Integer.parseInt(courseToken)
+    var courseTk: Int? = Integer.parseInt(courseToken)
 
-    if (courseTk>=coursesList.size){
-        courseTk = 0
+    if (courseTk != null) {
+        if (courseTk>=coursesList.size){
+            courseTk = 0
+        }
     }
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -92,7 +94,7 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
         }
 
     ){ innerPadding ->
-        WebContent(coursesList[courseTk],innerPadding)
+        WebContent(coursesList[courseTk!!],innerPadding)
     }
 //    Column(
 //        modifier = Modifier

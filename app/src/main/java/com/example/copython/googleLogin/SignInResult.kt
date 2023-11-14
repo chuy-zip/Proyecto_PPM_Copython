@@ -1,4 +1,4 @@
-package com.example.copython.Google
+package com.example.copython.googleLogin
 
 data class SignInResult(
     val data: UserData?,

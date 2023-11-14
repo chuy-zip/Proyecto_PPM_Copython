@@ -1,4 +1,4 @@
-package com.example.copython.Google
+package com.example.copython.googleLogin
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

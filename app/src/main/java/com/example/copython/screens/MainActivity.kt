@@ -21,10 +21,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.copython.Google.GoogleAuthUiClient
-import com.example.copython.Google.ProfileScreen
-import com.example.copython.Google.SignInViewModel
-import com.example.copython.navigation.AppNavigation
+import com.example.copython.googleLogin.GoogleAuthUiClient
+import com.example.copython.googleLogin.ProfileScreen
+import com.example.copython.googleLogin.SignInViewModel
 import com.example.copython.navigation.AppScreens
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
