@@ -88,7 +88,10 @@ class MainViewModel: ViewModel() {
                 _output.update { returnedText.output }
             } catch (e: Exception) {
                 // There was an error, let's add a new text with the details
-                _output.update { "API Error: ${e.message}" }
+                _output.update { "- Ha ocurrido un error, intenta reescribir tu pregunta y enviarla de nuevo \n " +
+                                 "- Recuerda hacer preguntas solo en ingles \n " +
+                                 "- Si deseas recibir una respuesta en español, puedes especificarlo al final de la pregunta. Por el ejemplo de la siguiente manera: \n" +
+                                 "- Tell me a joke, in spanish"}
             }
         }
     }

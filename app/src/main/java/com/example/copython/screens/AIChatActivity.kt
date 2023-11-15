@@ -12,7 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -25,7 +28,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.copython.Classes.MainViewModel
@@ -45,7 +50,7 @@ fun AIChatLayout(
      var lastProcessedTextOutput by remember { mutableStateOf("") }
      var messages by remember { mutableStateOf(emptyList<MessageItem>()) }
 
-     
+
      Column(
          modifier = Modifier
              .padding(innerPadding),
@@ -109,9 +114,10 @@ fun AIChatLayout(
      Box(
          modifier = Modifier
              .fillMaxWidth()
-             .padding(8.dp)
+             .wrapContentWidth(align = if (isUserMessage) Alignment.End else Alignment.Start)
+             .padding(12.dp)
+             .clip(shape = RoundedCornerShape(12.dp))
              .background(color)
-             .border(1.dp, Color.Black)
              .padding(8.dp),
          contentAlignment = if (isUserMessage) Alignment.CenterEnd else Alignment.CenterStart
      ) {
