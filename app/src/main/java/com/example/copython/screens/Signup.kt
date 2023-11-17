@@ -81,9 +81,9 @@ fun confirmPasswordInput(): String {
         label = {Text("Confirma tu contraseña") },
         colors = TextFieldDefaults.textFieldColors(
             textColor = DarkBlue10,
-            containerColor = Color(232,175,48),
-            unfocusedLabelColor = Color(51,97,172),
-            focusedLabelColor =  Color(22,47,101)),
+            containerColor = Yellow10,
+            unfocusedLabelColor = LightBlue20,
+            focusedLabelColor =  DarkBlue10),
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
     )
