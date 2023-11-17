@@ -51,7 +51,12 @@ import androidx.navigation.NavController
 import com.example.copython.Classes.BottomBarItem
 import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.Blue10
+import com.example.copython.ui.theme.ui.theme.DarkBlue10
+import com.example.copython.ui.theme.ui.theme.LightBlue10
 import com.example.copython.ui.theme.ui.theme.OrangeYellow
+import com.example.copython.ui.theme.ui.theme.PaleYellow
+import com.example.copython.ui.theme.ui.theme.Yellow10
+import com.example.copython.ui.theme.ui.theme.LightBlue20
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -180,7 +185,7 @@ fun TopTitle(tittle: String){
     Box(
         modifier = Modifier
             .fillMaxWidth() // Make the Box span the width of the screen
-            .background(Color(51, 97, 172)), // Set background color for the Box
+            .background(LightBlue20), // Set background color for the Box
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -204,9 +209,10 @@ fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingVa
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        CourseButton(courseName = "Variables y sus tipos", navController, "0" )
-        CourseButton(courseName = "IF-ELSE y sus condiciones", navController, "1")
-        CourseButton(courseName = "Ciclos y como usarlos", navController, "2")
+
+        CourseButton("Variables y como usarlas",navController, "1")
+        CourseButton("Declaraciones condicionales, if-else",navController, "2")
+        CourseButton("Ciclos (for and while), bases de iteración",navController, "3")
 
     }
 
@@ -214,8 +220,6 @@ fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingVa
 
 @Composable
 fun CourseButton(courseName: String, navController: NavController, courseToken:String){
-
-    val newButtonColor = Color(0xFF221387)
 
     Button(
         onClick = {navController.navigate(route = AppScreens.CourseExampleActivity.route + "/$courseToken")},
@@ -225,7 +229,7 @@ fun CourseButton(courseName: String, navController: NavController, courseToken:S
             .padding(16.dp)
             .height(90.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = newButtonColor,
+            containerColor = DarkBlue10,
             contentColor = Color.White)) {
         Text(
             fontSize = 20.sp,
@@ -253,7 +257,7 @@ fun BottomBar(navController: NavController){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(51,97,172),
+                containerColor = LightBlue20,
                 contentColor = Color.White)) {
             Text(text = "Main")
         }
@@ -265,7 +269,7 @@ fun BottomBar(navController: NavController){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(51,97,172),
+                containerColor = LightBlue20,
                 contentColor = Color.White)) {
             Text(text = "Search")
         }
@@ -277,7 +281,7 @@ fun BottomBar(navController: NavController){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(51,97,172),
+                containerColor = LightBlue20,
                 contentColor = Color.White)) {
             Text(text = "AI")
         }
@@ -289,7 +293,7 @@ fun BottomBar(navController: NavController){
                 .fillMaxWidth()
                 .fillMaxHeight(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(51,97,172),
+                containerColor = LightBlue20,
                 contentColor = Color.White)) {
             Text(text = "USER")
         }
