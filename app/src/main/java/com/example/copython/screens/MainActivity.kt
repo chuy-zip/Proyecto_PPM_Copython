@@ -89,7 +89,6 @@ class MainActivity : ComponentActivity() {
                     }
 
                     LoginLayout(
-                        state = state,
                         onSignInState = {
                             lifecycleScope.launch {
                                 val signInIntendSender = googleLoginClient.signIn()
@@ -119,25 +118,6 @@ class MainActivity : ComponentActivity() {
                     SignupLayout(navController)
                 }
 
-                composable("profile") {
-                    ProfileScreen(
-                        userData = googleLoginClient.getSignInedUser(),
-                        onSignOut = {
-                            lifecycleScope.launch {
-                                googleLoginClient.signOut()
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Hasta otra",
-                                    Toast.LENGTH_LONG
-                                ).show()
-
-                                navController.popBackStack()
-                            }
-                        },
-                        auth.currentUser?.email
-                    )
-                }
-
                 composable(route = AppScreens.MainMenu.route,
                     enterTransition = {
                         slideIntoContainer(
@@ -155,6 +135,7 @@ class MainActivity : ComponentActivity() {
                         onSignOut = {
                             lifecycleScope.launch {
                                 googleLoginClient.signOut()
+                                auth.signOut()
                                 Toast.makeText(
                                     applicationContext,
                                     "Hasta otra",

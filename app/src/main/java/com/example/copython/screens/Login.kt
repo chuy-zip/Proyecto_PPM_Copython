@@ -11,19 +11,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -42,28 +38,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.R
-import com.example.copython.googleLoginClient.SignInState
 import com.example.copython.navigation.AppScreens
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 val auth: FirebaseAuth = Firebase.auth
+
+var ACTUAL_EMAIL = auth.currentUser?.email
 @Composable
-fun LoginLayout(state: SignInState,
-                onSignInState: () -> Unit,
+fun LoginLayout(onSignInState: () -> Unit,
                 navController: NavController) {
-
-    LaunchedEffect(key1 = state.signInError) {
-        state.signInError.let { error ->
-//            Toast.makeText(
-//                context,
-//                error,
-//                Toast.LENGTH_LONG
-//            ).show()
-        }
-    }
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -185,29 +170,18 @@ fun LoginButton(
         Text(text = text,
             fontSize = 40.sp)
     }
-//
-//    Button(
-//        modifier = Modifier
-//            .padding(10.dp)
-//            .fillMaxWidth(),
-//        onClick = onSignInState,
-//        colors = ButtonDefaults.buttonColors(
-//            containerColor = Color(0xff4285F4)
-//        )) {
-//        Text(text = "Iniciar sesión con Google")
-//    }
 }
 
 private fun loginFun(email: String, password: String, context: Context, navController: NavController) {
 
     if (email.isBlank() || password.isBlank()) {
         Toast.makeText(context, "Asegúrate de llenar todos los campos", Toast.LENGTH_LONG).show()
-        return
     }
 
     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
         if (it.isSuccessful) {
             Toast.makeText(context, "Iniciaste sesión correctamente", Toast.LENGTH_LONG).show()
+
             navController.navigate(route = AppScreens.MainMenu.route)
 
         } else {

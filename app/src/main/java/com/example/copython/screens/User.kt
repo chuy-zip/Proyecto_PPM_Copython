@@ -1,12 +1,10 @@
 package com.example.copython.screens
 
 import android.net.Uri
-import android.widget.EditText
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,9 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,7 +29,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +40,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,12 +47,15 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.copython.R
 import com.example.copython.navigation.AppScreens
-import kotlin.contracts.contract
+import com.google.firebase.firestore.FirebaseFirestore
+
+val db: FirebaseFirestore
+    get() = FirebaseFirestore.getInstance()
 
 @Composable
 fun UserLayout(navController: NavController, innerPadding: PaddingValues, onSignOut: () -> Unit){
+
     Column(
         modifier = Modifier
             .padding(innerPadding),
@@ -84,7 +81,15 @@ fun UserInfo(){
     }
 
     var userName by remember {
-        mutableStateOf("Usuario")
+        mutableStateOf("")
+    }
+
+    var userNameToChage by remember {
+        mutableStateOf(userName)
+    }
+
+    db.collection("users").document((ACTUAL_EMAIL).toString()).get().addOnSuccessListener {
+        userName = (it.get("name") as String?).toString()
     }
 
     Column(
@@ -99,16 +104,16 @@ fun UserInfo(){
         SelectImageFromGallery()
 
         Row {
-            Text(
-                text = userName,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
+                Text(
+                    text = userName,
+                    color = Color.White,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
 
-                modifier = Modifier
-                    .padding(10.dp)
-                    .height(60.dp)
-            )
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .height(60.dp)
+                )
 
             IconButton(onClick = { showDialog = true }) {
                 Icon(
@@ -130,12 +135,17 @@ fun UserInfo(){
 
                             Text(text = "Cambiar nombre de usuario")
 
-                            OutlinedTextField(value = userName, onValueChange = { userName = it },
+                            OutlinedTextField(value = userNameToChage, onValueChange = { userNameToChage = it },
                                 label = { Text(text = "Ingresa tu nombre de usuario") },
                                 modifier = Modifier.padding(16.dp)
-                                )
-                            
-                            Button(onClick = { showDialog = false }) {
+                            )
+
+                            fun changeUserName(): Boolean {
+                                db.collection("users").document(ACTUAL_EMAIL.toString()).update("name", userNameToChage)
+                                return false
+                            }
+
+                            Button(onClick = { showDialog = changeUserName() }) {
                                 Text(text = "Aceptar")
                                 
                             }
@@ -187,16 +197,17 @@ fun LogOutButton(onSignOut: () -> Unit) {
             fontSize = 30.sp)
     }
 }
+
 @Composable
 fun SelectImageFromGallery() {
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
-        
-        val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.PickVisualMedia(),
-            onResult = { uri -> selectedImageUri = uri }
-        )
+
+    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri }
+    )
 
     AsyncImage(
         model = selectedImageUri,
@@ -205,11 +216,14 @@ fun SelectImageFromGallery() {
             .size(250.dp)
             .padding(15.dp)
             .clip(CircleShape),
-        contentScale = ContentScale.Crop)
-    
-    Button(onClick = { singlePhotoPickerLauncher.launch(
-        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-    ) }) {
+        contentScale = ContentScale.Crop
+    )
+
+    Button(onClick = {
+        singlePhotoPickerLauncher.launch(
+            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+        )
+    }) {
         Text(text = "Cambiar foto")
     }
 }
