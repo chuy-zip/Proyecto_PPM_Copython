@@ -212,7 +212,7 @@ fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingVa
 
         CourseButton("Variables y como usarlas",navController, "0")
         CourseButton("Declaraciones condicionales, if-else",navController, "1")
-        CourseButton("Ciclos (for and while), bases de iteración",navController, "2")
+        CourseButton("Ciclos (for and while), bases de iteración",navController, "3")
 
     }
 
