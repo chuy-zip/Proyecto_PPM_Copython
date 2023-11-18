@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.navigation.AppScreens
+import com.example.copython.ui.theme.ui.theme.DarkBlue10
+import com.example.copython.ui.theme.ui.theme.LightBlue20
+import com.example.copython.ui.theme.ui.theme.Yellow10
 
 
 @Composable
@@ -38,13 +41,13 @@ fun SignupLayout(navController: NavController) {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        TopClouds(51, 97, 172,50,"")
+        TopClouds(2,50,"")
         CopythonIcon()
         val userEmail = emailInput("Bienvenido")
         val userPassword = passwordInput()
         val passwordVerification = confirmPasswordInput()
         SignUpButton("Registrarse", navController, userEmail, userPassword, passwordVerification, LocalContext.current)
-        BottomSquare("¿Ya tienes una cuenta? Iniciar sesión.",navController, AppScreens.Login.route, 232, 175, 48)
+        BottomSquare(2,"¿Ya tienes una cuenta? Iniciar sesión.",navController, AppScreens.Login.route)
     }
 }
 
@@ -56,8 +59,8 @@ fun SignUpButton(text: String, navController: NavController, userEmail: String, 
             width = 5.dp,
             brush = Brush.horizontalGradient(
                 listOf(
-                    Color(232,175,48),
-                    Color(51,97,172)
+                    Yellow10,
+                    LightBlue20
                 )
             )
         )
@@ -77,10 +80,10 @@ fun confirmPasswordInput(): String {
         onValueChange = {userPassword = it},
         label = {Text("Confirma tu contraseña") },
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(22,47,101),
-            containerColor = Color(232,175,48),
-            unfocusedLabelColor = Color(51,97,172),
-            focusedLabelColor =  Color(22,47,101)),
+            textColor = DarkBlue10,
+            containerColor = Yellow10,
+            unfocusedLabelColor = LightBlue20,
+            focusedLabelColor =  DarkBlue10),
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
     )

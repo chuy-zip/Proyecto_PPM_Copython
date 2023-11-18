@@ -44,6 +44,12 @@ import com.example.copython.navigation.AppScreens
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.example.copython.ui.theme.ui.theme.DarkBlue10
+import com.example.copython.ui.theme.ui.theme.LightBlue10
+import com.example.copython.ui.theme.ui.theme.OrangeYellow
+import com.example.copython.ui.theme.ui.theme.PaleYellow
+import com.example.copython.ui.theme.ui.theme.Yellow10
+import com.example.copython.ui.theme.ui.theme.LightBlue20
 
 val auth: FirebaseAuth = Firebase.auth
 @Composable
@@ -53,20 +59,20 @@ fun LoginLayout(navController: NavController) {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-        TopClouds(232, 175, 48,50,"")
+        TopClouds(1,50,"")
         CopythonIcon()
         val emailInput = emailInput("Ingresa tu\n\n información")
         val password = passwordInput()
         LoginButton("Iniciar Sesión", navController, emailInput, password, LocalContext.current)
-        BottomSquare("¿Aún no tienes una cuenta?",navController, AppScreens.Signup.route, 51, 97, 172)
+        BottomSquare(1,"¿Aún no tienes una cuenta?",navController, AppScreens.Signup.route)
     }
 }
 
 @Composable
-fun TopClouds(red: Int, green: Int, blue: Int, boxSize: Int,username: String) {
+fun TopClouds(color: Int, boxSize: Int,username: String) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .background(Color(red, green, blue)),
+        .background(if (color==1) Yellow10 else LightBlue20),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -88,7 +94,7 @@ fun emailInput(text: String): String {
 
     Text(text = text,
         textAlign = TextAlign.Center,
-        color = Color(51,97,172),
+        color = LightBlue20,
         fontSize = 40.sp,
         fontWeight = FontWeight.Black
     )
@@ -99,9 +105,9 @@ fun emailInput(text: String): String {
         shape = CircleShape,
         label = {Text("Correo Electrónico") },
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(22,47,101),
-            containerColor = Color(232,199,102),
-            unfocusedLabelColor = Color(51,97,172))
+            textColor = DarkBlue10,
+            containerColor = PaleYellow,
+            unfocusedLabelColor = LightBlue20)
     )
     return userEmail
 }
@@ -116,10 +122,10 @@ fun passwordInput(): String {
         onValueChange = {userPassword = it},
         label = {Text("Contraseña") },
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(22,47,101),
-            containerColor = Color(232,175,48),
-            unfocusedLabelColor = Color(51,97,172),
-            focusedLabelColor =  Color(22,47,101)),
+            textColor = DarkBlue10,
+            containerColor = Yellow10,
+            unfocusedLabelColor = LightBlue20,
+            focusedLabelColor =  DarkBlue10),
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
     )
@@ -127,16 +133,16 @@ fun passwordInput(): String {
 }
 
 @Composable
-fun BottomSquare(text: String,navController: NavController, route: String, red: Int, green: Int, blue: Int) {
+fun BottomSquare(color: Int,text: String,navController: NavController, route: String) {
     Text(text = text,
-        color = Color(red, green, blue),
+        color = if (color==1) LightBlue20 else Yellow10,
         fontWeight = FontWeight.Black,
         modifier = Modifier.clickable(onClick = {navController.navigate(route)})
     )
 
     Box(modifier = Modifier
         .fillMaxWidth()
-        .background(Color(red, green, blue)),
+        .background(if (color==1) LightBlue20 else Yellow10),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -153,8 +159,8 @@ fun LoginButton(text: String, navController: NavController, userEmail: String, u
             width = 5.dp,
             brush = Brush.horizontalGradient(
                 listOf(
-                    Color(232,175,48),
-                    Color(51,97,172)
+                    Yellow10,
+                    LightBlue20
                 )
             )
         )

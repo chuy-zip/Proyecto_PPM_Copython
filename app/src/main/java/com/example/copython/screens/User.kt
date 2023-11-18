@@ -29,6 +29,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.R
 import com.example.copython.navigation.AppScreens
+import com.example.copython.ui.theme.ui.theme.DarkBlue10
+import com.example.copython.ui.theme.ui.theme.LightBlue10
+import com.example.copython.ui.theme.ui.theme.Orange10
+import com.example.copython.ui.theme.ui.theme.PaleYellow
+import com.example.copython.ui.theme.ui.theme.Yellow10
+import com.example.copython.ui.theme.ui.theme.LightBlue20
 
 @Composable
 fun UserLayout(navController: NavController, innerPadding: PaddingValues){
@@ -53,7 +59,7 @@ fun UserInfo(tittle: String){
         modifier = Modifier
             .size(420.dp)
             .fillMaxWidth() // Make the Box span the width of the screen
-            .background(Color(51, 97, 172)), // Set background color for the Box
+            .background(LightBlue20), // Set background color for the Box
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -91,8 +97,8 @@ fun OptionButton(text: String, navController: NavController, route: String) {
             width = 5.dp,
             brush = Brush.horizontalGradient(
                 listOf(
-                    Color(232,175,48),
-                    Color(255, 87, 34, 255)
+                    Yellow10,
+                    Orange10
                 )
             )
         )
