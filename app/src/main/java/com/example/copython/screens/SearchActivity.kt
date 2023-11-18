@@ -36,11 +36,11 @@ fun ScrollableCoursesColumn(navController: NavController){
         modifier = Modifier
             .verticalScroll(rememberScrollState())
     ){
-        CourseButton("Variables y como usarlas",navController, "1")
-        CourseButton("Declaraciones condicionales, if-else",navController, "2")
-        CourseButton("Ciclos (for and while), bases de iteración",navController, "3")
-        CourseButton("Funciones y sus usos",navController, "5")
-        CourseButton("Listas(Arrays) y tuplas",navController, "4")
-        CourseButton("Clases en Python",navController, "6")
+        CourseButton("Variables y como usarlas",navController, "0")
+        CourseButton("Declaraciones condicionales, if-else",navController, "1")
+        CourseButton("Ciclos (for and while), bases de iteración",navController, "2")
+        CourseButton("Funciones y sus usos",navController, "4")
+        CourseButton("Listas(Arrays) y tuplas",navController, "3")
+        CourseButton("Clases en Python",navController, "5")
     }
 }
