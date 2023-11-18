@@ -56,7 +56,7 @@ import com.example.copython.ui.theme.ui.theme.OrangeYellow
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainMenuLayout(navController: NavController){
+fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
 
     var currentScreenName by remember { mutableStateOf( "Cursos") }
     var currentScreenTitle by remember { mutableStateOf( "Cursos actuales") }
@@ -163,7 +163,7 @@ fun MainMenuLayout(navController: NavController){
                     AIChatLayout(navController = navController, innerPadding)
                 }
                 "Perfil" -> {
-                    UserLayout(navController = navController, innerPadding)
+                    UserLayout(navController = navController, innerPadding, onSignOut)
                 }
                 else -> {
                     // Code to execute when none of the cases match

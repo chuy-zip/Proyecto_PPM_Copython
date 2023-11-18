@@ -11,15 +11,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,12 +38,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.R
-import com.example.copython.navigation.AppNavigation
+import com.example.copython.googleLoginClient.SignInState
 import com.example.copython.navigation.AppScreens
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -47,7 +50,20 @@ import com.google.firebase.ktx.Firebase
 
 val auth: FirebaseAuth = Firebase.auth
 @Composable
-fun LoginLayout(navController: NavController) {
+fun LoginLayout(state: SignInState,
+                onSignInState: () -> Unit,
+                navController: NavController) {
+
+    LaunchedEffect(key1 = state.signInError) {
+        state.signInError.let { error ->
+//            Toast.makeText(
+//                context,
+//                error,
+//                Toast.LENGTH_LONG
+//            ).show()
+        }
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -57,7 +73,7 @@ fun LoginLayout(navController: NavController) {
         CopythonIcon()
         val emailInput = emailInput("Ingresa tu\n\n información")
         val password = passwordInput()
-        LoginButton("Iniciar Sesión", navController, emailInput, password, LocalContext.current)
+        LoginButton("Iniciar Sesión", navController, emailInput, password, LocalContext.current, onSignInState)
         BottomSquare("¿Aún no tienes una cuenta?",navController, AppScreens.Signup.route, 51, 97, 172)
     }
 }
@@ -146,7 +162,14 @@ fun BottomSquare(text: String,navController: NavController, route: String, red: 
 }
 
 @Composable
-fun LoginButton(text: String, navController: NavController, userEmail: String, userPassword: String, context: Context) {
+fun LoginButton(
+    text: String,
+    navController: NavController,
+    userEmail: String,
+    userPassword: String,
+    context: Context,
+    onSignInState: () -> Unit
+) {
     OutlinedButton(
         onClick = { loginFun(userEmail, userPassword, context, navController) },
         border = BorderStroke(
@@ -162,6 +185,17 @@ fun LoginButton(text: String, navController: NavController, userEmail: String, u
         Text(text = text,
             fontSize = 40.sp)
     }
+//
+//    Button(
+//        modifier = Modifier
+//            .padding(10.dp)
+//            .fillMaxWidth(),
+//        onClick = onSignInState,
+//        colors = ButtonDefaults.buttonColors(
+//            containerColor = Color(0xff4285F4)
+//        )) {
+//        Text(text = "Iniciar sesión con Google")
+//    }
 }
 
 private fun loginFun(email: String, password: String, context: Context, navController: NavController) {
@@ -180,10 +214,4 @@ private fun loginFun(email: String, password: String, context: Context, navContr
             Toast.makeText(context, "Correo o contraseña inválidos.", Toast.LENGTH_LONG).show()
         }
     }
-}
-
-@Preview
-@Composable
-fun LoginPreview() {
-    AppNavigation()
 }

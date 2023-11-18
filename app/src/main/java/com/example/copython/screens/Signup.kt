@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.copython.navigation.AppScreens
 
-
 @Composable
 fun SignupLayout(navController: NavController) {
     Column(
@@ -97,6 +96,10 @@ private fun signupFun(email: String, password: String, passwordVerification: Str
     if (password != passwordVerification) {
         Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
         return
+    }
+
+    if (password.length <= 5) {
+        Toast.makeText(context, "Contraseña demasiado corta", Toast.LENGTH_LONG).show()
     }
 
     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
