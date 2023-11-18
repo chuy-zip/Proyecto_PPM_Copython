@@ -1,6 +1,7 @@
 package com.example.copython.screens
 
 import android.net.Uri
+import android.widget.EditText
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -10,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,9 +20,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,8 +47,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.copython.R
@@ -60,10 +75,15 @@ fun UserLayout(navController: NavController, innerPadding: PaddingValues, onSign
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserInfo(){
 
-    val userName by remember {
+    var showDialog by remember {
+        mutableStateOf(false)
+    }
+
+    var userName by remember {
         mutableStateOf("Usuario")
     }
 
@@ -78,16 +98,52 @@ fun UserInfo(){
     ) {
         SelectImageFromGallery()
 
-        Text(
-            text = userName,
-            color = Color.White,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
+        Row {
+            Text(
+                text = userName,
+                color = Color.White,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
 
-            modifier = Modifier
-                .padding(10.dp)
-                .height(60.dp)
-        )
+                modifier = Modifier
+                    .padding(10.dp)
+                    .height(60.dp)
+            )
+
+            IconButton(onClick = { showDialog = true }) {
+                Icon(
+                    Icons.Filled.Edit,
+                    contentDescription = null)
+            }
+
+            if(showDialog) {
+                Dialog(onDismissRequest = { showDialog = false },
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally) {
+
+                            Text(text = "Cambiar nombre de usuario")
+
+                            OutlinedTextField(value = userName, onValueChange = { userName = it },
+                                label = { Text(text = "Ingresa tu nombre de usuario") },
+                                modifier = Modifier.padding(16.dp)
+                                )
+                            
+                            Button(onClick = { showDialog = false }) {
+                                Text(text = "Aceptar")
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -107,7 +163,8 @@ fun OptionButton(text: String, navController: NavController, route: String) {
         )
     ) {
         Text(text = text,
-            fontSize = 30.sp)
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center)
     }
 }
 

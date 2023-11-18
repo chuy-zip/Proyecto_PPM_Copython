@@ -48,7 +48,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.copython.Classes.BottomBarItem
+import com.example.copython.classes.BottomBarItem
 import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.Blue10
 import com.example.copython.ui.theme.ui.theme.OrangeYellow
