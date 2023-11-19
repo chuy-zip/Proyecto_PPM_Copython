@@ -107,8 +107,8 @@ fun UserInfo(){
         modifier = Modifier
             .size(420.dp)
             .fillMaxWidth() // Make the Box span the width of the screen
-            .background(LightBlue20), // Set background color for the Box
-            .fillMaxHeight()
+            .background(LightBlue20) // Set background color for the Box
+            .fillMaxHeight(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
