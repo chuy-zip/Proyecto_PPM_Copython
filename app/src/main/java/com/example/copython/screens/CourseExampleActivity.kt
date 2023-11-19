@@ -27,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -37,7 +36,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.copython.ui.theme.ui.theme.Blue10
-import kotlinx.coroutines.tasks.await
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,24 +92,6 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
 
     ){ innerPadding ->
         WebContent(coursesList[courseTk],innerPadding)
-
-        LaunchedEffect(key1 = ACTUAL_EMAIL) {
-            try {
-                val document = db.collection("users").document(ACTUAL_EMAIL.toString()).get().await()
-                var currentCourses = document.get("courses") as List<Boolean>? ?: emptyList()
-
-                // Update the specific course
-                currentCourses = currentCourses.toMutableList().apply {
-                    this[courseTk] = true
-                }
-
-                db.collection("users").document(ACTUAL_EMAIL.toString()).update("courses", currentCourses)
-
-            } catch (e: Exception) {
-                // Handle the exception
-            }
-        }
-
     }
 //    Column(
 //        modifier = Modifier

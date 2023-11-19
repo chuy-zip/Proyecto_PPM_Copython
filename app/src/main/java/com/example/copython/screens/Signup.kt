@@ -28,13 +28,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.copython.R
 import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.DarkBlue10
 import com.example.copython.ui.theme.ui.theme.LightBlue20
 import com.example.copython.ui.theme.ui.theme.Yellow10
 
-import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
 fun SignupLayout(navController: NavController) {
@@ -94,8 +92,6 @@ fun confirmPasswordInput(): String {
 
 private fun signupFun(email: String, password: String, passwordVerification: String, context: Context, navController: NavController) {
 
-    val db = FirebaseFirestore.getInstance()
-
     if (email.isBlank() || password.isBlank()) {
         Toast.makeText(context, "Asegúrate de llenar todos los campos", Toast.LENGTH_LONG).show()
         return
@@ -106,21 +102,9 @@ private fun signupFun(email: String, password: String, passwordVerification: Str
         return
     }
 
-    if (password.length <= 5) {
-        Toast.makeText(context, "Contraseña demasiado corta", Toast.LENGTH_LONG).show()
-    }
-
     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
         if (it.isSuccessful) {
             Toast.makeText(context, "Te has registrado correctamente", Toast.LENGTH_LONG).show()
-
-            db.collection("users").document(email).set(
-                hashMapOf("address" to email,
-                    "profilePicture" to R.drawable.user,
-                    "name" to "Usuario",
-                    "courses" to listOf(false,false,false,false,false,false))
-            )
-
             navController.navigate(route = AppScreens.Login.route)
 
         } else {

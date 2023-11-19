@@ -1,4 +1,4 @@
-package com.example.copython.classes
+package com.example.copython.Classes
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
