@@ -1,12 +1,15 @@
 package com.example.copython.screens
 
 import android.net.Uri
+import android.widget.StackView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -40,13 +43,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.copython.R
 import com.example.copython.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -209,15 +215,27 @@ fun SelectImageFromGallery() {
         onResult = { uri -> selectedImageUri = uri }
     )
 
-    AsyncImage(
-        model = selectedImageUri,
-        contentDescription = null,
-        modifier = Modifier
-            .size(250.dp)
-            .padding(15.dp)
-            .clip(CircleShape),
-        contentScale = ContentScale.Crop
-    )
+    Box {
+
+        Image(painter = painterResource(id = R.drawable.user), contentDescription = null,
+            modifier = Modifier
+                .size(250.dp)
+                .padding(15.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
+
+        AsyncImage(
+            model = selectedImageUri,
+            contentDescription = null,
+            modifier = Modifier
+                .size(250.dp)
+                .padding(15.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
+
+    }
 
     Button(onClick = {
         singlePhotoPickerLauncher.launch(
