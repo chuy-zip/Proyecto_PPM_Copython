@@ -85,4 +85,5 @@ dependencies {
 
     implementation("androidx.activity:activity-ktx:1.8.1")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
 }
