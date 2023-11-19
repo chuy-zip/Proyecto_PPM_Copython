@@ -88,11 +88,11 @@ fun UserInfo(){
     }
 
     var userName by remember {
-        mutableStateOf("")
+        mutableStateOf("$ACTUAL_EMAIL")
     }
 
     var userNameToChage by remember {
-        mutableStateOf(userName)
+        mutableStateOf("")
     }
 
 
@@ -145,7 +145,7 @@ fun UserInfo(){
                             )
 
                             fun changeUserName(): Boolean {
-//                                db.collection("users").document(ACTUAL_EMAIL.toString()).update("name", userNameToChage)
+                                userName = userNameToChage
                                 return false
                             }
 
@@ -160,27 +160,6 @@ fun UserInfo(){
         }
     }
 }
-
-//@Composable
-//fun OptionButton(text: String, navController: NavController, route: String) {
-//    OutlinedButton(
-//        modifier = Modifier.width(275.dp),
-//        onClick = {navController.navigate(route)},
-//        border = BorderStroke(
-//            width = 5.dp,
-//            brush = Brush.horizontalGradient(
-//                listOf(
-//                    Yellow10,
-//                    Orange10
-//                )
-//            )
-//        )
-//    ) {
-//        Text(text = text,
-//            fontSize = 30.sp,
-//            textAlign = TextAlign.Center)
-//    }
-//}
 
 @Composable
 fun LogOutButton(onSignOut: () -> Unit) {
