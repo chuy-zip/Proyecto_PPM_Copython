@@ -1,5 +1,7 @@
 # Proyecto Programación de Plataformas Móviles
 
+## [Enlace a la presentación técnica del proyecto](https://drive.google.com/file/d/19rCIEFmPe_HOy1FjyzntEk2J3zW5Tvhf/view?usp=sharing)
+
 ## Introducción
 Hemos escuchado una gran cantidad de veces la frase: “la programación es muy difícil” por parte de
 personas que están aprendiendo a programar y no se ven interesadas en el mundo de la
