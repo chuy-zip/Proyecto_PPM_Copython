@@ -47,8 +47,7 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-3",
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-4",
         "https://sonrietuexistes555.wixsite.com/copythonapp/curso-5",
-        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-6",
-        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-7"
+        "https://sonrietuexistes555.wixsite.com/copythonapp/curso-6"
     )
     var courseTk: Int = Integer.parseInt(courseToken)
 
