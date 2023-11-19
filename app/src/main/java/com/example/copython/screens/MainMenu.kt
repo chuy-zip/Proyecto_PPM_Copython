@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -33,7 +35,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -48,7 +52,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.copython.Classes.BottomBarItem
+import com.example.copython.classes.BottomBarItem
 import com.example.copython.navigation.AppScreens
 import com.example.copython.ui.theme.ui.theme.Blue10
 import com.example.copython.ui.theme.ui.theme.DarkBlue10
@@ -57,14 +61,15 @@ import com.example.copython.ui.theme.ui.theme.OrangeYellow
 import com.example.copython.ui.theme.ui.theme.PaleYellow
 import com.example.copython.ui.theme.ui.theme.Yellow10
 import com.example.copython.ui.theme.ui.theme.LightBlue20
+import kotlinx.coroutines.tasks.await
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainMenuLayout(navController: NavController){
+fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
 
-    var currentScreenName by remember { mutableStateOf( "Cursos") }
-    var currentScreenTitle by remember { mutableStateOf( "Cursos actuales") }
+    var currentScreenName by remember { mutableStateOf( "Buscar") }
+    var currentScreenTitle by remember { mutableStateOf( "Cursos Disponibles") }
 
     when (currentScreenName) {
         "Cursos" -> {
@@ -106,7 +111,7 @@ fun MainMenuLayout(navController: NavController){
         )
     )
     var selectedItemIndex by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(1)
     }
     Scaffold (
         topBar = {
@@ -168,7 +173,7 @@ fun MainMenuLayout(navController: NavController){
                     AIChatLayout(navController = navController, innerPadding)
                 }
                 "Perfil" -> {
-                    UserLayout(navController = navController, innerPadding)
+                    UserLayout(navController = navController, innerPadding, onSignOut)
                 }
                 else -> {
                     // Code to execute when none of the cases match
@@ -202,21 +207,39 @@ fun TopTitle(tittle: String){
     }
 }
 @Composable
-fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingValues){
-    Column (
-        modifier = Modifier
-            .padding(innePadding),
+fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingValues) {
+    Column(
+        modifier = Modifier.padding(innePadding),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally){
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        var userCourses by remember { mutableStateOf<List<Boolean>>(emptyList()) }
 
-
-        CourseButton("Variables y como usarlas",navController, "0")
-        CourseButton("Declaraciones condicionales, if-else",navController, "1")
-        CourseButton("Ciclos (for and while), bases de iteración",navController, "3")
-
+        LaunchedEffect(key1 = ACTUAL_EMAIL) {
+            try {
+                val document = db.collection("users").document(ACTUAL_EMAIL.toString()).get().await()
+                userCourses = document.get("courses") as List<Boolean>? ?: emptyList()
+            } catch (e: Exception) {
+                // Handle the exception
+            }
+        }
+        LazyColumn {
+            items(userCourses.size) { index ->
+                if (userCourses[index]) {
+                    when (index) {
+                        0 -> CourseButton(courseName = "Variables y como usarlas", navController, "0")
+                        1 -> CourseButton(courseName = "Declaraciones condicionales, if-else", navController, "1")
+                        2 -> CourseButton(courseName = "Listas(Arrays) y tuplas", navController, "2")
+                        3 -> CourseButton(courseName = "Ciclos (for and while), bases de iteración", navController, "3")
+                        4 -> CourseButton(courseName = "Funciones y sus usos", navController, "4")
+                        5 -> CourseButton(courseName = "Clases en python", navController, "5")
+                    }
+                }
+            }
+        }
     }
-
 }
+
 
 @Composable
 fun CourseButton(courseName: String, navController: NavController, courseToken:String){
