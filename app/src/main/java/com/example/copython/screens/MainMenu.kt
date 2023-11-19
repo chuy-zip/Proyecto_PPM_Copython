@@ -155,9 +155,6 @@ fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
         },
         content = {innerPadding ->
             when (currentScreenName) {
-                "Cursos" -> {
-                    ArrangeOfCoursesButtons(navController =  navController, innerPadding)
-                }
                 "Buscar" -> {
                     SearchCoursesActivityLayout(navController = navController, innerPadding)
                 }
@@ -176,36 +173,6 @@ fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
     )
 
 }
-
-@Composable
-fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingValues) {
-    Column(
-        modifier = Modifier.padding(innePadding),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        var userCourses by remember { mutableStateOf<List<Boolean>>(emptyList()) }
-
-        LaunchedEffect(key1 = ACTUAL_EMAIL) {
-
-        }
-        LazyColumn {
-            items(userCourses.size) { index ->
-                if (userCourses[index]) {
-                    when (index) {
-                        0 -> CourseButton(courseName = "Variables y como usarlas", navController, "0")
-                        1 -> CourseButton(courseName = "Declaraciones condicionales, if-else", navController, "1")
-                        2 -> CourseButton(courseName = "Listas(Arrays) y tuplas", navController, "2")
-                        3 -> CourseButton(courseName = "Ciclos (for and while), bases de iteración", navController, "3")
-                        4 -> CourseButton(courseName = "Funciones y sus usos", navController, "4")
-                        5 -> CourseButton(courseName = "Clases en python", navController, "5")
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 @Composable
 fun CourseButton(courseName: String, navController: NavController, courseToken:String){

@@ -93,15 +93,6 @@ fun CourseExampleLayout(navController: NavController, courseToken: String?){
     ){ innerPadding ->
         WebContent(coursesList[courseTk],innerPadding)
     }
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize(),
-//        verticalArrangement = Arrangement.SpaceBetween,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ){
-//        ScrollableTextsColumn()
-//    }
-
 }
 
 @Composable

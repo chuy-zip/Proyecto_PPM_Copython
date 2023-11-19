@@ -1,7 +1,6 @@
 package com.example.copython.screens
 
 import android.net.Uri
-import android.widget.StackView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,20 +45,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.copython.R
-import com.example.copython.navigation.AppScreens
-import com.example.copython.ui.theme.ui.theme.DarkBlue10
-import com.example.copython.ui.theme.ui.theme.LightBlue10
 import com.example.copython.ui.theme.ui.theme.Orange10
 import com.example.copython.ui.theme.ui.theme.PaleYellow
-import com.example.copython.ui.theme.ui.theme.Yellow10
 import com.example.copython.ui.theme.ui.theme.LightBlue20
+import com.example.copython.ui.theme.ui.theme.OrangeYellow
 
 
 @Composable
@@ -149,7 +145,9 @@ fun UserInfo(){
                                 return false
                             }
 
-                            Button(onClick = { showDialog = changeUserName() }) {
+                            Button(
+                                onClick = { showDialog = changeUserName() },
+                                colors = ButtonDefaults.buttonColors(containerColor = OrangeYellow)) {
                                 Text(text = "Aceptar")
 
                             }
@@ -170,8 +168,8 @@ fun LogOutButton(onSignOut: () -> Unit) {
             width = 5.dp,
             brush = Brush.horizontalGradient(
                 listOf(
-                    Color(232,175,48),
-                    Color(255, 87, 34, 255)
+                    PaleYellow,
+                    Orange10
                 )
             )
         )
@@ -214,11 +212,14 @@ fun SelectImageFromGallery() {
 
     }
 
-    Button(onClick = {
+    Button(
+        onClick = {
         singlePhotoPickerLauncher.launch(
             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
         )
-    }) {
+    },
+        colors = ButtonDefaults.buttonColors(containerColor = OrangeYellow)
+    ) {
         Text(text = "Cambiar foto")
     }
 }
