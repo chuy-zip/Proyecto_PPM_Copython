@@ -56,9 +56,12 @@ import com.example.copython.ui.theme.ui.theme.PaleYellow
 import com.example.copython.ui.theme.ui.theme.LightBlue20
 import com.example.copython.ui.theme.ui.theme.OrangeYellow
 
-
 @Composable
 fun UserLayout(navController: NavController, innerPadding: PaddingValues, onSignOut: () -> Unit){
+
+    var ACTUAL_EMAIL by remember {
+        mutableStateOf(auth.currentUser?.email)
+    }
 
     Column(
         modifier = Modifier
@@ -66,7 +69,7 @@ fun UserLayout(navController: NavController, innerPadding: PaddingValues, onSign
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        UserInfo()
+        UserInfo(ACTUAL_EMAIL)
         Spacer(modifier = Modifier.height(40.dp))
         Spacer(modifier = Modifier.height(20.dp))
         LogOutButton(onSignOut)
@@ -77,7 +80,7 @@ fun UserLayout(navController: NavController, innerPadding: PaddingValues, onSign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserInfo(){
+fun UserInfo(ACTUAL_EMAIL: String?){
 
     var showDialog by remember {
         mutableStateOf(false)

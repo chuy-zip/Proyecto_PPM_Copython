@@ -51,8 +51,6 @@ import com.example.copython.ui.theme.ui.theme.LightBlue20
 
 val auth: FirebaseAuth = Firebase.auth
 
-var ACTUAL_EMAIL = auth.currentUser?.email
-
 @Composable
 fun LoginLayout(onSignInState: () -> Unit,
                 navController: NavController) {
