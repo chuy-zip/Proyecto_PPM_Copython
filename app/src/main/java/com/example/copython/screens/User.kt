@@ -59,11 +59,7 @@ import com.example.copython.ui.theme.ui.theme.Orange10
 import com.example.copython.ui.theme.ui.theme.PaleYellow
 import com.example.copython.ui.theme.ui.theme.Yellow10
 import com.example.copython.ui.theme.ui.theme.LightBlue20
-import com.google.firebase.firestore.FirebaseFirestore
 
-
-val db: FirebaseFirestore
-    get() = FirebaseFirestore.getInstance()
 
 @Composable
 fun UserLayout(navController: NavController, innerPadding: PaddingValues, onSignOut: () -> Unit){
@@ -99,9 +95,6 @@ fun UserInfo(){
         mutableStateOf(userName)
     }
 
-    db.collection("users").document((ACTUAL_EMAIL).toString()).get().addOnSuccessListener {
-        userName = (it.get("name") as String?).toString()
-    }
 
     Column(
         modifier = Modifier

@@ -72,9 +72,6 @@ fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
     var currentScreenTitle by remember { mutableStateOf( "Cursos Disponibles") }
 
     when (currentScreenName) {
-        "Cursos" -> {
-            currentScreenTitle = "Cursos Actuales"
-        }
         "Buscar" -> {
             currentScreenTitle = "Cursos disponibles"
         }
@@ -91,11 +88,6 @@ fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
 
     val screens = listOf(
         BottomBarItem(
-            title = "Cursos",
-            selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home
-        ),
-        BottomBarItem(
             title = "Buscar",
             selectedIcon = Icons.Filled.Search,
             unselectedIcon = Icons.Outlined.Search
@@ -111,7 +103,7 @@ fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
         )
     )
     var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(1)
+        mutableIntStateOf(0)
     }
     Scaffold (
         topBar = {
@@ -186,27 +178,6 @@ fun MainMenuLayout(navController: NavController, onSignOut: () -> Unit){
 }
 
 @Composable
-fun TopTitle(tittle: String){
-    Box(
-        modifier = Modifier
-            .fillMaxWidth() // Make the Box span the width of the screen
-            .background(LightBlue20), // Set background color for the Box
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = tittle,
-            color = Color.White,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-
-            modifier = Modifier
-                .padding(16.dp)
-                .height(60.dp)
-
-        )
-    }
-}
-@Composable
 fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingValues) {
     Column(
         modifier = Modifier.padding(innePadding),
@@ -216,12 +187,7 @@ fun ArrangeOfCoursesButtons(navController: NavController, innePadding: PaddingVa
         var userCourses by remember { mutableStateOf<List<Boolean>>(emptyList()) }
 
         LaunchedEffect(key1 = ACTUAL_EMAIL) {
-            try {
-                val document = db.collection("users").document(ACTUAL_EMAIL.toString()).get().await()
-                userCourses = document.get("courses") as List<Boolean>? ?: emptyList()
-            } catch (e: Exception) {
-                // Handle the exception
-            }
+
         }
         LazyColumn {
             items(userCourses.size) { index ->
@@ -262,64 +228,4 @@ fun CourseButton(courseName: String, navController: NavController, courseToken:S
         )
     }
 
-}
-
-
-@Composable
-fun BottomBar(navController: NavController){
-    Row( modifier = Modifier
-        .fillMaxWidth()
-        .height(80.dp),
-        horizontalArrangement = Arrangement.SpaceAround){
-
-        Button(
-            onClick = {navController.navigate(AppScreens.MainMenu.route)},
-            shape = RectangleShape,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = LightBlue20,
-                contentColor = Color.White)) {
-            Text(text = "Main")
-        }
-        Button(
-            onClick = {navController.navigate(AppScreens.SearchActivity.route)},
-            shape = RectangleShape,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = LightBlue20,
-                contentColor = Color.White)) {
-            Text(text = "Search")
-        }
-        Button(
-            onClick = {navController.navigate(AppScreens.AIChatActivity.route)},
-            shape = RectangleShape,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = LightBlue20,
-                contentColor = Color.White)) {
-            Text(text = "AI")
-        }
-        Button(
-            onClick = {navController.navigate(AppScreens.User.route)},
-            shape = RectangleShape,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = LightBlue20,
-                contentColor = Color.White)) {
-            Text(text = "USER")
-        }
-
-    }
 }
