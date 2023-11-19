@@ -113,7 +113,8 @@ private fun signupFun(email: String, password: String, passwordVerification: Str
             db.collection("users").document(email).set(
                 hashMapOf("address" to email,
                     "profilePicture" to R.drawable.user,
-                    "name" to "Usuario")
+                    "name" to "Usuario",
+                    "courses" to listOf(false,false,false,false,false,false))
             )
 
             navController.navigate(route = AppScreens.Login.route)
